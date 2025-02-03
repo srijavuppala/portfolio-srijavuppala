@@ -1,8 +1,11 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-secondary to-background py-20 px-4">
       <div className="max-w-4xl mx-auto text-center animate-fade-in">
@@ -17,7 +20,10 @@ const Hero = () => {
           Currently working at Optum (UnitedHealth Group).
         </p>
         <div className="flex gap-4 justify-center">
-          <Button className="bg-primary hover:bg-primary/90">
+          <Button 
+            className="bg-primary hover:bg-primary/90"
+            onClick={() => navigate('/projects')}
+          >
             View Projects <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
           <Button variant="outline">
