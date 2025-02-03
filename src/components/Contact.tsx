@@ -19,7 +19,7 @@ const Contact = () => {
           <Button
             variant="outline"
             className="flex items-center gap-2"
-            onClick={() => window.open('https://linkedin.com/in/your-profile')}
+            onClick={() => window.open('https://www.linkedin.com/in/srija-vuppala/')}
           >
             <Linkedin className="h-4 w-4" />
             LinkedIn
