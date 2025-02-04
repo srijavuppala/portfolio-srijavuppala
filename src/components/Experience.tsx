@@ -138,12 +138,11 @@ const Experience = () => {
                   </div>
                 </HoverCardContent>
               </HoverCard>
-            </div>
-          </VerticalTimelineElement>
-        ))}
-      </VerticalTimeline>
-    </div>
-  </section>
+            </VerticalTimelineElement>
+          ))}
+        </VerticalTimeline>
+      </div>
+    </section>
   );
 };
 
