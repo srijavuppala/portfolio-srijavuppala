@@ -6,6 +6,7 @@ import Hero from '@/components/Hero';
 import Experience from '@/components/Experience';
 import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
+import Chatbot from '@/components/Chatbot';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('portfolio');
@@ -32,7 +33,7 @@ const Index = () => {
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <Navigation 
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -42,6 +43,7 @@ const Index = () => {
       <div className="transition-all duration-300">
         {renderContent()}
       </div>
+      <Chatbot />
     </main>
   );
 };
