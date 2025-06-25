@@ -1,40 +1,40 @@
-
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const roles = [
-  "Cloud Developer",
-  "CI/CD Developer", 
-  "Machine Learning Engineer",
+  "AI/ML Developer",
+  "DevOps Engineer",
+  "Software Developer",
   "Hardware Engineer",
-  "AI/ML Engineer",
-  "Software Developer"
+  "Product Developer",
+  "Telecom Engineer"
 ];
 
 const DynamicRoles = () => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-        setIsVisible(true);
-      }, 300);
+      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
     }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="h-8 flex items-center justify-center">
-      <span 
-        className={`text-xl md:text-2xl text-primary font-semibold transition-all duration-300 ${
-          isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-2'
-        }`}
-      >
-        {roles[currentRoleIndex]}
-      </span>
+    <div className="h-12 flex items-center justify-center overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={currentRoleIndex}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="text-2xl md:text-3xl text-primary font-semibold absolute"
+        >
+          {roles[currentRoleIndex]}
+        </motion.span>
+      </AnimatePresence>
     </div>
   );
 };
