@@ -17,8 +17,8 @@ const experiences = [
   {
     company: "Optum (UnitedHealth Group)",
     role: "AI & Cloud Engineer",
-    period: "2022 - Present",
-    description: "Leading AI and cloud initiatives, developing innovative healthcare solutions using cutting-edge technologies.",
+    period: "Feb 2024 - July 2024",
+    description: "Led AI and cloud initiatives, developing innovative healthcare solutions using cutting-edge technologies during this internship/contract period.",
     achievements: [
       "Developed RAG Chatbot using Snowflake and Mistral LLM",
       "Implemented real-time monitoring systems",
@@ -35,7 +35,7 @@ const experiences = [
   {
     company: "Ericsson",
     role: "Software Engineer",
-    period: "Previous",
+    period: "February 2023 - December 2023",
     description: "Developed and maintained critical telecommunications software solutions.",
     achievements: [
       "Built scalable network monitoring tools",
@@ -69,7 +69,7 @@ const Experience = () => {
             </p>
             
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              My experience at <span className="text-primary font-semibold">Optum</span> and <span className="text-primary font-semibold">Ericsson</span>, combined with leadership in technical workshops as a <span className="text-primary font-semibold">Microsoft Student Ambassador</span>, fuels my commitment to collaboration and continuous learning.
+              My recent experience at <span className="text-primary font-semibold">Optum</span> (Feb-July 2024) and previous role at <span className="text-primary font-semibold">Ericsson</span>, combined with leadership in technical workshops as a <span className="text-primary font-semibold">Microsoft Student Ambassador</span>, fuels my commitment to collaboration and continuous learning.
             </p>
             
             <p className="text-lg text-muted-foreground leading-relaxed">

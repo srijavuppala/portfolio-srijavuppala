@@ -21,7 +21,7 @@ app.use(cors({
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Configure the chat model
-const chatModel = genAI.getGenerativeModel({ model: "gemini-pro" });
+const chatModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 app.post('/api/chat', async (req, res) => {
   try {
@@ -36,11 +36,11 @@ app.post('/api/chat', async (req, res) => {
       history: systemPrompt ? [
         {
           role: "user",
-          parts: [{ text: "Here is information about Srija Vuppala that you should use to answer questions: " + systemPrompt }],
+          parts: [{ text: "You are Srija Vuppala's AI assistant. Answer questions as if you are representing Srija, speaking about her experience in a helpful and informative way. Use the following information about Srija: " + systemPrompt + "\n\nAlways respond as if you are her assistant helping visitors learn about her background and experience." }],
         },
         {
           role: "model",
-          parts: [{ text: "I understand. I'll use this information about Srija Vuppala to help answer questions about her background, experience, and interests." }],
+          parts: [{ text: "Hello! I'm Srija's AI assistant. I'm here to help you learn about her experience, projects, and expertise. I'll provide detailed information about her work at Optum and Ericsson, her technical skills, and her various projects. Feel free to ask me anything about her background!" }],
         },
       ] : [],
       generationConfig: {
@@ -59,6 +59,11 @@ app.post('/api/chat', async (req, res) => {
     res.json({ response: text });
   } catch (error) {
     console.error('Error generating response:', error);
+    console.error('Error details:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
     
     if (error.message?.includes('429')) {
       return res.status(429).json({ error: 'Rate limit exceeded' });
@@ -68,7 +73,10 @@ app.post('/api/chat', async (req, res) => {
       return res.status(403).json({ error: 'Authentication failed' });
     }
     
-    res.status(500).json({ error: 'Failed to generate response' });
+    res.status(500).json({ 
+      error: 'Failed to generate response',
+      details: error.message 
+    });
   }
 });
 

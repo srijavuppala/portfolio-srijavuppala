@@ -9,19 +9,58 @@ interface Message {
 }
 
 const SYSTEM_PROMPT = `ABOUT SRIJA VUPPALA:
-* Passionate Electrical Engineering grad student and aspiring ML/LLM/Embedded/Software Engineer
-* Diverse tech experience from internships at Ericsson (ECU & embedded systems) and Optum (DevOps, ML, Power BI dashboards)
-* Projects: EquiShare (React), Yonify Radio (web + marketing), Mood Detection App, Farm Kharo IoT, EDGE (ML model optimization), RAMN ECU hacking, and more
-* Skills: Python, React, SQL, Power BI, Firebase, Docker, Git, Embedded C, ARM, TensorFlow
-* Interests: Machine Learning, Embedded Systems, Cybersecurity, UX/UI, DevOps
-* Known for: Team leadership, problem-solving, and innovative solutions`;
+
+RECENT EXPERIENCE:
+* AI & Cloud Engineer at Optum (UnitedHealth Group) - February 2024 to July 2024
+* Led AI and cloud initiatives, developing innovative healthcare solutions during this internship/contract period
+* Key achievements: Developed RAG Chatbot using Snowflake and Mistral LLM, implemented real-time monitoring systems, led cloud infrastructure automation projects
+* Technologies used: AI/ML, Cloud Computing, DevOps, Python, React
+
+PREVIOUS EXPERIENCE:
+* Software Engineer at Ericsson (Telecommunications)
+* Built scalable network monitoring tools, optimized system performance, implemented automated testing frameworks
+* Technologies used: Java, Spring, Docker, Kubernetes, CI/CD pipelines
+
+EDUCATION & LEADERSHIP:
+* Microsoft Student Ambassador - Leading technical workshops and collaboration
+* Full-stack developer and DevOps engineer with passion for innovation
+* Active contributor to open-source projects
+
+KEY PROJECTS:
+* RAG Chatbot Application - Built using Snowflake, Cortex Search, and Mistral LLM for intelligent document processing
+* Google Vertex AI Chatbot - Integrated solution using Google Vertex AI and AlloyDB
+* Real-Time Monitoring System - Web application for monitoring and compliance in operations
+* Infrastructure Management - Automated system for managing and scaling cloud infrastructure
+* CI/CD Pipeline Tool - Automated deployment pipeline with Docker and Kubernetes integration
+
+TECHNICAL EXPERTISE:
+* Programming: Python, Java, React, JavaScript
+* Cloud & DevOps: AWS, Docker, Kubernetes, CI/CD, Infrastructure Automation
+* AI/ML: Snowflake, Mistral LLM, Google Vertex AI, AlloyDB, Machine Learning
+* Databases: SQL, AlloyDB, Snowflake
+* Other: Spring Framework, Monitoring Systems, Network Tools
+
+SPECIALIZATIONS:
+* AI/ML Development - Building intelligent chatbots and AI solutions
+* DevOps Engineering - Infrastructure automation and CI/CD pipelines  
+* Software Development - Full-stack web applications
+* Hardware Engineering - Network monitoring and telecommunications
+* Product Development - End-to-end solution development
+* Telecom Engineering - Network optimization and monitoring tools
+
+INTERESTS & PASSION:
+* Exploring AI/ML advancements and LLM technologies
+* Cloud infrastructure and automation
+* Open-source contributions
+* Building innovative solutions that bridge technology and user needs
+* Collaborative learning and technical leadership`;
 
 const SUGGESTION_CHIPS = [
-  "Tell me about your experience at Ericsson",
-  "What projects have you worked on?",
-  "What are your technical skills?",
-  "What are your career goals?",
-  "Tell me about your education"
+  "Tell me about your work at Optum",
+  "What's the RAG chatbot project about?",
+  "Describe your Ericsson experience",
+  "What AI/ML projects have you built?",
+  "Tell me about your DevOps expertise"
 ];
 
 export default function Chatbot() {
