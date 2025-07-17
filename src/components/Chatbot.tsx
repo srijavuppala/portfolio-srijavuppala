@@ -51,7 +51,10 @@ export default function Chatbot() {
 
   const generateResponse = async (message: string) => {
     try {
-      const response = await fetch('/api/chat', {
+      // Use different API endpoint based on environment
+      const apiUrl = import.meta.env.PROD ? '/api/chat' : '/api/chat';
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
