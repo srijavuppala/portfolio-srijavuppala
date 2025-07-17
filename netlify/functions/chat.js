@@ -1,99 +1,90 @@
+// Simple CommonJS version for better Netlify compatibility
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const chatModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
 exports.handler = async (event, context) => {
-  // Handle CORS
+  // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
   };
 
   // Handle preflight requests
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: '',
-    };
+    return { statusCode: 200, headers, body: '' };
   }
 
-  // Only allow POST requests
+  // Only allow POST
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
       headers,
-      body: JSON.stringify({ error: 'Method not allowed' }),
+      body: JSON.stringify({ error: 'Method not allowed' })
     };
   }
 
   try {
-    const { message, systemPrompt } = JSON.parse(event.body);
+    // Check if API key exists
+    if (!process.env.GEMINI_API_KEY) {
+      console.error('GEMINI_API_KEY not found');
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'API key not configured' })
+      };
+    }
+
+    const { message, systemPrompt } = JSON.parse(event.body || '{}');
     
     if (!message) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: 'Message is required' }),
+        body: JSON.stringify({ error: 'Message is required' })
       };
     }
 
-    // Create a chat instance with system prompt
-    const chat = chatModel.startChat({
-      history: systemPrompt ? [
-        {
-          role: "user",
-          parts: [{ text: "You are Srija Vuppala's AI assistant. Answer questions as if you are representing Srija, speaking about her experience in a helpful and informative way. Use the following information about Srija: " + systemPrompt + "\n\nAlways respond as if you are her assistant helping visitors learn about her background and experience." }],
-        },
-        {
-          role: "model",
-          parts: [{ text: "Hello! I'm Srija's AI assistant. I'm here to help you learn about her experience, projects, and expertise. I'll provide detailed information about her work at Optum and Ericsson, her technical skills, and her various projects. Feel free to ask me anything about her background!" }],
-        },
-      ] : [],
-      generationConfig: {
-        maxOutputTokens: 2048,
-        temperature: 0.9,
-        topP: 1,
-        topK: 1,
-      },
-    });
+    // Initialize AI
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    // Create prompt
+    const fullPrompt = systemPrompt 
+      ? `${systemPrompt}\n\nUser: ${message}\nAssistant:` 
+      : message;
 
     // Generate response
-    const result = await chat.sendMessage(message);
+    const result = await model.generateContent(fullPrompt);
     const response = await result.response;
     const text = response.text();
-    
+
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ response: text }),
+      body: JSON.stringify({ response: text })
     };
+
   } catch (error) {
-    console.error('Error generating response:', error);
+    console.error('Function error:', error);
     
+    // Handle specific errors
     let errorMessage = 'Failed to generate response';
-    let statusCode = 500;
-    
-    if (error.message?.includes('429')) {
+    if (error.message?.includes('API_KEY')) {
+      errorMessage = 'Invalid API key';
+    } else if (error.message?.includes('429')) {
       errorMessage = 'Rate limit exceeded';
-      statusCode = 429;
-    } else if (error.message?.includes('403')) {
-      errorMessage = 'Authentication failed';
-      statusCode = 403;
     } else if (error.message?.includes('503')) {
-      errorMessage = 'The AI service is temporarily overloaded. Please try again later.';
-      statusCode = 503;
+      errorMessage = 'Service temporarily unavailable';
     }
-    
+
     return {
-      statusCode,
+      statusCode: 500,
       headers,
       body: JSON.stringify({ 
         error: errorMessage,
         details: error.message 
-      }),
+      })
     };
   }
-}; 
+};
