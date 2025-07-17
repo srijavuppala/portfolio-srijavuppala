@@ -185,10 +185,8 @@ npm run preview
 
 ## 📱 Contact & Links
 
-- **Portfolio**: [Live Demo](your-live-url)
-- **LinkedIn**: [Your LinkedIn](your-linkedin)
-- **GitHub**: [Your GitHub](your-github)
-- **Email**: your-email@domain.com
+- **LinkedIn**: [Your LinkedIn](https://www.linkedin.com/in/srija-vuppala/)
+- **Email**: srijavuppala11@gmail.com
 
 ## 🤝 Contributing
 
