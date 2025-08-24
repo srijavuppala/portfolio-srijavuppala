@@ -1,7 +1,6 @@
 
-import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Mail, Linkedin, MapPin, Globe } from 'lucide-react';
+import { Mail, Linkedin, Globe, Github } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -41,16 +40,20 @@ const Contact = () => {
             <Button
               variant="outline"
               className="flex items-center gap-2 w-full"
+              onClick={() => window.open('https://github.com/srijavuppala', '_blank')}
+            >
+              <Github className="h-4 w-4" />
+              GitHub Profile
+            </Button>
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 w-full"
               onClick={() => window.location.reload()}
             >
               <Globe className="h-4 w-4" />
               Portfolio Website
             </Button>
           </div>
-        </div>
-        <div className="flex items-center justify-center gap-2 text-muted-foreground">
-          <MapPin className="h-4 w-4" />
-          <span>Richardson, Dallas</span>
         </div>
       </div>
     </section>

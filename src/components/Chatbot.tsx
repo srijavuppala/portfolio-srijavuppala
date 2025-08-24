@@ -101,7 +101,7 @@ export default function Chatbot() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -112,10 +112,20 @@ export default function Chatbot() {
     <div className="fixed bottom-6 right-6 z-50">
       {isOpen ? (
         <Card className="w-[400px] h-[600px] flex flex-col bg-background/95 backdrop-blur-sm border border-primary/20 shadow-xl">
-          <div className="p-4 border-b bg-primary text-white flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full ${error ? 'bg-red-400' : 'bg-green-400'} animate-pulse`} />
-              <span className="font-semibold">Chat with Srija's Assistant</span>
+          <div className="p-6 border-b bg-transparent text-primary flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <img 
+                  src="/assets/profile-photo.png" 
+                  alt="Srija's Profile" 
+                  className="w-14 h-14 rounded-full object-cover border-2 border-primary/20" 
+                />
+                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-background"></div>
+              </div>
+              <div>
+                <span className="font-semibold block">Chat with Srija's Assistant</span>
+                <span className="text-sm text-muted-foreground">AI-powered portfolio guide</span>
+              </div>
             </div>
             <Button 
               onClick={() => setIsOpen(false)}
@@ -182,7 +192,7 @@ export default function Chatbot() {
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               placeholder="Ask me anything about Srija..."
               className="flex-1"
               disabled={isLoading}
@@ -199,9 +209,16 @@ export default function Chatbot() {
       ) : (
         <Button
           onClick={() => setIsOpen(true)}
-          className="h-16 w-16 rounded-full bg-primary text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110"
+          className="h-20 w-20 rounded-full bg-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 p-1"
         >
-          💬
+          <div className="relative w-full h-full">
+            <img 
+              src="/assets/profile-photo.png" 
+              alt="Chat with Srija" 
+              className="w-full h-full rounded-full object-cover" 
+            />
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+          </div>
         </Button>
       )}
     </div>

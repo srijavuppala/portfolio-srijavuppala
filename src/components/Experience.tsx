@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
@@ -9,7 +8,11 @@ import {
   CloudIcon,
   BrainCircuitIcon,
   ChevronDownIcon,
-  ExternalLinkIcon
+  ExternalLinkIcon,
+  UsersIcon,
+  GraduationCapIcon,
+  AwardIcon,
+  BookOpenIcon
 } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
@@ -52,6 +55,47 @@ const experiences = [
   }
 ];
 
+const education = [
+  {
+    university: "University of Texas at Dallas",
+    degree: "Master in Computer Engineering",
+    period: "August 2024 - May 2026",
+    location: "Dallas, Texas, USA",
+    description: "Advanced coursework focused on cutting-edge technologies and research in computer engineering.",
+    achievements: [
+      "Specialized in Cloud Computing and Machine Learning",
+      "Advanced research in Database Theory and Algorithms",
+      "Graduate Teaching Assistant opportunities",
+      "Active participation in technology research groups"
+    ],
+    coursework: ["Cloud Computing", "Machine Learning", "Database Theory", "Advanced Algorithms", "Operating Systems"],
+    icon: <GraduationCapIcon className="w-5 h-5" />,
+    iconBackground: "#FF6B35",
+    links: [
+      { title: "UTD Computer Engineering", url: "https://engineering.utdallas.edu/" }
+    ]
+  },
+  {
+    university: "Jawaharlal Nehru Technology University",
+    degree: "Bachelor of Technology in Electronics and Communication Engineering",
+    period: "August 2019 - June 2023",
+    location: "Telangana, India",
+    description: "Comprehensive foundation in engineering principles with strong emphasis on programming and system design.",
+    achievements: [
+      "First Class with Distinction",
+      "Winner of Inter-University Programming Contest",
+      "Lead Developer in multiple academic projects",
+      "Published research in communication systems"
+    ],
+    coursework: ["C", "Java", "Python", "Data Structures", "DBMS", "Probability & Statistics", "Computer Networks", "Web Technologies", "Data Mining", "Software Engineering", "Operating Systems"],
+    icon: <BookOpenIcon className="w-5 h-5" />,
+    iconBackground: "#4A90E2",
+    links: [
+      { title: "JNTU Official Website", url: "https://jntuh.ac.in/" }
+    ]
+  }
+];
+
 const Experience = () => {
   return (
     <section className="py-20 px-4 bg-background">
@@ -79,7 +123,7 @@ const Experience = () => {
         </div>
 
         {/* Experience Section */}
-        <div>
+        <div className="mb-20">
           <div className="flex items-center gap-4 mb-12">
             <div className="w-12 h-0.5 bg-primary"></div>
             <h2 className="text-2xl font-bold">Experience</h2>
@@ -155,6 +199,102 @@ const Experience = () => {
                             <a
                               key={i}
                               href={link.url}
+                              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              <ExternalLinkIcon className="w-4 h-4" />
+                              {link.title}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </HoverCardContent>
+                </HoverCard>
+              </VerticalTimelineElement>
+            ))}
+          </VerticalTimeline>
+        </div>
+
+        {/* Education Section */}
+        <div>
+          <div className="flex items-center gap-4 mb-12">
+            <div className="w-12 h-0.5 bg-primary"></div>
+            <h2 className="text-2xl font-bold">Education</h2>
+          </div>
+          
+          <VerticalTimeline lineColor="var(--border)">
+            {education.map((edu, index) => (
+              <VerticalTimelineElement
+                key={index}
+                className="vertical-timeline-element--education"
+                contentStyle={{
+                  background: 'var(--background)',
+                  color: 'var(--foreground)',
+                  border: '1px solid var(--border)',
+                  borderRadius: '0.5rem',
+                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+                contentArrowStyle={{ borderRight: '7px solid var(--border)' }}
+                date={edu.period}
+                iconStyle={{ background: edu.iconBackground, color: '#fff' }}
+                icon={edu.icon}
+              >
+                <HoverCard>
+                  <HoverCardTrigger asChild>
+                    <div className="group cursor-pointer">
+                      <h3 className="text-xl font-semibold text-primary mb-1 group-hover:text-accent transition-colors">
+                        {edu.university}
+                      </h3>
+                      <h4 className="text-lg font-medium mb-2">{edu.degree}</h4>
+                      <p className="text-sm text-muted-foreground mb-2">{edu.location}</p>
+                      <p className="text-muted-foreground mb-4">{edu.description}</p>
+                      
+                      <div className="flex items-center text-sm text-muted-foreground gap-1">
+                        <ChevronDownIcon className="w-4 h-4" />
+                        <span>Hover for details</span>
+                      </div>
+                    </div>
+                  </HoverCardTrigger>
+                  
+                  <HoverCardContent className="w-96">
+                    <div className="space-y-4">
+                      <div>
+                        <h5 className="font-medium mb-2">Key Achievements:</h5>
+                        <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                          {edu.achievements.map((achievement, i) => (
+                            <li key={i} className="hover:text-foreground transition-colors">
+                              {achievement}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h5 className="font-medium mb-2">Relevant Coursework:</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {edu.coursework.map((course, i) => (
+                            <Badge 
+                              key={i} 
+                              variant="secondary"
+                              className="hover:bg-primary hover:text-primary-foreground transition-colors"
+                            >
+                              {course}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h5 className="font-medium mb-2">Learn More:</h5>
+                        <div className="space-y-2">
+                          {edu.links.map((link, i) => (
+                            <a
+                              key={i}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                             >
                               <ExternalLinkIcon className="w-4 h-4" />

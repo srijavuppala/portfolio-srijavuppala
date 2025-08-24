@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,21 +9,23 @@ const projects = [
     description: "Built using Snowflake, Cortex Search, and Mistral LLM for intelligent document processing and Q&A.",
     tags: ["AI", "Snowflake", "LLM"],
     category: "AI & ML",
-    color: "from-blue-500 to-purple-600"
+    color: "from-blue-500 to-purple-600",
+    github: "https://github.com/srijavuppala/rag_chat_bot"
+  },
+  {
+    title: "Portfolio Website",
+    description: "Modern portfolio website built with React, Vite, and TailwindCSS featuring interactive components and animations.",
+    tags: ["React", "Vite", "TailwindCSS"],
+    category: "Web Apps",
+    color: "from-green-500 to-emerald-600",
+    github: "https://github.com/srijavuppala/portfolio-srijavuppala-2"
   },
   {
     title: "Real-Time Monitoring System",
     description: "Web application for monitoring and ensuring compliance in real-time operations.",
     tags: ["DevOps", "Monitoring", "Web"],
-    category: "Web Apps",
-    color: "from-green-500 to-emerald-600"
-  },
-  {
-    title: "Google Vertex AI Chatbot",
-    description: "Integrated chatbot solution using Google Vertex AI and AlloyDB for enhanced user interactions.",
-    tags: ["Google Cloud", "AI", "Database"],
-    category: "AI & ML",
-    color: "from-blue-500 to-purple-600"
+    category: "DevOps",
+    color: "from-orange-500 to-red-600"
   },
   {
     title: "Infrastructure Management",
@@ -32,13 +33,6 @@ const projects = [
     tags: ["Cloud", "Automation", "DevOps"],
     category: "DevOps",
     color: "from-orange-500 to-red-600"
-  },
-  {
-    title: "Portfolio Website",
-    description: "The codebase for this portfolio, showcasing my skills and projects.",
-    tags: ["React", "Vite", "Firebase"],
-    category: "Showcase",
-    color: "from-pink-500 to-rose-600"
   },
   {
     title: "CI/CD Pipeline Tool",
@@ -56,13 +50,6 @@ const filterCategories = [
     icon: "🎯",
     description: "View all projects",
     gradient: "from-gray-500 to-gray-700"
-  },
-  { 
-    name: "Showcase", 
-    count: projects.filter(p => p.category === "Showcase").length, 
-    icon: "💎",
-    description: "Featured work",
-    gradient: "from-pink-500 to-rose-600"
   },
   { 
     name: "AI & ML", 
@@ -104,7 +91,7 @@ const Projects = () => {
         </p>
         
         {/* Enhanced Filter Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
           {filterCategories.map((category) => (
             <div
               key={category.name}
@@ -162,6 +149,19 @@ const Projects = () => {
                     </Badge>
                   ))}
                 </div>
+                {project.github && (
+                  <a 
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-4 text-sm text-primary hover:underline"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/>
+                    </svg>
+                    View on GitHub
+                  </a>
+                )}
               </CardHeader>
             </Card>
           ))}
