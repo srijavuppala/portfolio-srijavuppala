@@ -35,17 +35,19 @@ VITE_API_BASE="/api"
 ```
 src/
   components/
-    Chatbot.tsx
-    Hero.tsx
-    Projects.tsx
-    Experience.tsx
-    Contact.tsx
-    ui/...
-  hooks/...
-  pages/...
+    Chatbot.tsx            # Floating AI assistant
+    Hero.tsx               # Landing section
+    Projects.tsx           # Projects grid
+    Experience.tsx         # Experience timeline
+    Contact.tsx            # Contact actions
+    ui/                    # Shadcn UI primitives
+  hooks/                   # Custom hooks
+  pages/                   # (Optional) route pages
 public/
   assets/
-    profile-photo.png (add your photo)
+    profile-photo.png      # Your profile photo (add)
+scripts/
+  server.js                # Optional dev helper/server
 ```
 
 ### Deployment
