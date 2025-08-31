@@ -19,6 +19,8 @@ netlify.toml
 .claude/
 .DS_Store
 *.lockb
+# Bun
+bun.lockb
 
 # Editor directories and files
 .vscode/*
