@@ -11,12 +11,17 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+netlify/
+netlify.toml
+.DS_Store
+*.lockb
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
