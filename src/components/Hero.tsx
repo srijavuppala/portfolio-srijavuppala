@@ -1,13 +1,28 @@
 import { Button } from "@/components/ui/button";
+import { useRef, useState } from 'react';
 import { ArrowRight, Download, Github, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import DynamicRoles from './DynamicRoles';
+import profilePhoto from '/assets/profile-photo.jpeg';
 
 interface HeroProps {
   onViewProjects?: () => void;
 }
 
 const Hero = ({ onViewProjects }: HeroProps) => {
+  const [photoUrl, setPhotoUrl] = useState<string>(profilePhoto);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleChoosePhoto = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    setPhotoUrl(objectUrl);
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -26,7 +41,6 @@ const Hero = ({ onViewProjects }: HeroProps) => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
       },
     },
   };
@@ -50,15 +64,29 @@ const Hero = ({ onViewProjects }: HeroProps) => {
               whileHover={{ scale: 1.05, rotate: 5 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="w-full h-full rounded-full bg-background flex items-center justify-center shadow-2xl">
-                <div className="w-72 h-72 rounded-full bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 flex items-center justify-center text-white text-xl font-bold animate-pulse">
-                  <div className="text-center">
-                    <div className="text-2xl mb-2">📸</div>
-                    <div>Add Your Photo Here</div>
-                  </div>
-                </div>
+              <div className="w-full h-full rounded-full bg-background flex items-center justify-center shadow-2xl overflow-hidden">
+                <img 
+                  src={photoUrl}
+                  alt="Srija Vuppala"
+                  className="w-72 h-72 rounded-full object-cover"
+                />
               </div>
             </motion.div>
+
+            {/* Hidden file input for changing the photo */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handlePhotoChange}
+            />
+
+            <div className="mt-4 flex justify-center">
+              <Button variant="outline" className="h-8 px-3 text-sm" onClick={handleChoosePhoto}>
+                Change Photo
+              </Button>
+            </div>
             
             {/* Floating elements */}
             <motion.div
@@ -137,13 +165,6 @@ const Hero = ({ onViewProjects }: HeroProps) => {
               onClick={() => onViewProjects?.()}
             >
               View Projects <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            
-            <Button 
-              variant="outline"
-              className="hover:scale-105 transition-all duration-200 border-primary/50 hover:border-primary"
-            >
-              Download CV <Download className="ml-2 h-4 w-4" />
             </Button>
           </motion.div>
 
