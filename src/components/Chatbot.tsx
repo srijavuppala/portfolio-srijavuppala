@@ -24,11 +24,15 @@ KEEP RESPONSES BRIEF AND FOCUSED!`;
 
 const SUGGESTION_CHIPS = [
   "Tell me about your work at Optum",
-  "What's the RAG chatbot project about?",
+  "What's the ML end-to-end project about?",
   "Describe your Ericsson experience",
   "What AI/ML projects have you built?",
-  "Tell me about your DevOps expertise"
+  "Tell me about your voice detection project"
 ];
+
+// Response cache for better performance
+const responseCache = new Map();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,8 +55,17 @@ export default function Chatbot() {
 
   const generateResponse = async (message: string) => {
     try {
+      // Check cache first for better performance
+      const cacheKey = message.toLowerCase().trim();
+      const cached = responseCache.get(cacheKey);
+      if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+        return cached.response;
+      }
+
       // Use different API endpoint based on environment
-      const apiUrl = import.meta.env.PROD ? '/api/chat' : '/api/chat';
+      const apiUrl = import.meta.env.PROD 
+        ? '/.netlify/functions/chat' 
+        : 'http://localhost:4000/api/chat';
       
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -70,9 +83,38 @@ export default function Chatbot() {
       }
 
       const data = await response.json();
+      
+      // Cache the response for future use
+      if (data.response) {
+        responseCache.set(cacheKey, {
+          response: data.response,
+          timestamp: Date.now()
+        });
+        
+        // Clean old cache entries periodically
+        if (responseCache.size > 50) {
+          const now = Date.now();
+          for (const [key, value] of responseCache.entries()) {
+            if (now - value.timestamp > CACHE_DURATION) {
+              responseCache.delete(key);
+            }
+          }
+        }
+      }
+      
       return data.response;
     } catch (error) {
       console.error('Error generating response:', error);
+      
+      // Enhanced error handling with fallback responses
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error('Network connection failed. Please check your internet connection.');
+      }
+      
+      if (error.message?.includes('timeout')) {
+        throw new Error('Request timed out. Please try again.');
+      }
+      
       throw error;
     }
   };
@@ -93,8 +135,17 @@ export default function Chatbot() {
       const response = await generateResponse(userMessage);
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
     } catch (error) {
-      setError('Failed to get response. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to get response. Please try again.';
+      setError(errorMessage);
       console.error('Error:', error);
+      
+      // Add fallback response for better UX
+      if (error.message?.includes('Network') || error.message?.includes('timeout')) {
+        setMessages(prev => [...prev, { 
+          role: 'assistant', 
+          content: "I'm having trouble connecting right now. You can reach out to Srija directly at srijavuppala11@gmail.com or connect with her on LinkedIn!" 
+        }]);
+      }
     } finally {
       setIsLoading(false);
       setShowSuggestions(true);
@@ -116,8 +167,8 @@ export default function Chatbot() {
             <div className="flex items-center gap-3">
               <div className="relative">
                 <img 
-                  src="/assets/profile-photo.png" 
-                  alt="Srija's Profile" 
+                  src="/assets/chatbot.png" 
+                  alt="Chatbot" 
                   className="w-14 h-14 rounded-full object-cover border-2 border-primary/20" 
                 />
                 <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-background"></div>
@@ -213,7 +264,7 @@ export default function Chatbot() {
         >
           <div className="relative w-full h-full">
             <img 
-              src="/assets/profile-photo.png" 
+              src="/assets/chatbot.png" 
               alt="Chat with Srija" 
               className="w-full h-full rounded-full object-cover" 
             />

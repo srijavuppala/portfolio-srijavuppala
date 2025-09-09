@@ -45,14 +45,6 @@ const Contact = () => {
               <Github className="h-4 w-4" />
               GitHub Profile
             </Button>
-            <Button
-              variant="outline"
-              className="flex items-center gap-2 w-full"
-              onClick={() => window.location.reload()}
-            >
-              <Globe className="h-4 w-4" />
-              Portfolio Website
-            </Button>
           </div>
         </div>
       </div>

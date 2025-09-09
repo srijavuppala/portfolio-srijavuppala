@@ -13,33 +13,44 @@ const projects = [
     github: "https://github.com/srijavuppala/rag_chat_bot"
   },
   {
+    title: "ML End-to-End Pipeline",
+    description: "Complete machine learning pipeline from data preprocessing to model deployment, showcasing MLOps practices and automated workflows.",
+    tags: ["Python", "MLOps", "Deployment", "ML"],
+    category: "AI & ML",
+    color: "from-blue-500 to-purple-600",
+    github: "https://github.com/srijavuppala/ml_end_to_end"
+  },
+  {
+    title: "Voice Detection Dashboard",
+    description: "IoT dashboard control system with speech-to-text integration for voice-activated device management and real-time monitoring.",
+    tags: ["IoT", "Speech-to-Text", "Dashboard", "Voice Control"],
+    category: "IoT & Voice",
+    color: "from-purple-500 to-pink-600",
+    github: "https://github.com/srijavuppala/voice_detect"
+  },
+  {
+    title: "Email Template MCP Server",
+    description: "MCP server for creating customized email templates with dynamic content generation and template management system.",
+    tags: ["MCP", "Email Templates", "Node.js", "Templates"],
+    category: "Web Apps",
+    color: "from-green-500 to-emerald-600",
+    github: "https://github.com/srijavuppala/email-template"
+  },
+  {
+    title: "Gesture Detection System",
+    description: "Advanced computer vision system for real-time gesture recognition and interactive control using machine learning models.",
+    tags: ["Computer Vision", "Gesture Recognition", "ML", "Real-time"],
+    category: "AI & ML",
+    color: "from-blue-500 to-purple-600",
+    github: "https://github.com/srijavuppala/gesture-detection"
+  },
+  {
     title: "Portfolio Website",
     description: "Modern portfolio website built with React, Vite, and TailwindCSS featuring interactive components and animations.",
     tags: ["React", "Vite", "TailwindCSS"],
     category: "Web Apps",
     color: "from-green-500 to-emerald-600",
     github: "https://github.com/srijavuppala/portfolio-srijavuppala-2"
-  },
-  {
-    title: "Real-Time Monitoring System",
-    description: "Web application for monitoring and ensuring compliance in real-time operations.",
-    tags: ["DevOps", "Monitoring", "Web"],
-    category: "DevOps",
-    color: "from-orange-500 to-red-600"
-  },
-  {
-    title: "Infrastructure Management",
-    description: "Automated system for managing and scaling cloud infrastructure efficiently.",
-    tags: ["Cloud", "Automation", "DevOps"],
-    category: "DevOps",
-    color: "from-orange-500 to-red-600"
-  },
-  {
-    title: "CI/CD Pipeline Tool",
-    description: "Automated deployment pipeline with Docker and Kubernetes integration.",
-    tags: ["Docker", "Kubernetes", "CI/CD"],
-    category: "DevOps",
-    color: "from-orange-500 to-red-600"
   }
 ];
 
@@ -66,11 +77,11 @@ const filterCategories = [
     gradient: "from-green-500 to-emerald-600"
   },
   { 
-    name: "DevOps", 
-    count: projects.filter(p => p.category === "DevOps").length, 
-    icon: "⚙️",
-    description: "Development Operations",
-    gradient: "from-orange-500 to-red-600"
+    name: "IoT & Voice", 
+    count: projects.filter(p => p.category === "IoT & Voice").length, 
+    icon: "🎤",
+    description: "IoT & Voice Control",
+    gradient: "from-purple-500 to-pink-600"
   }
 ];
 
