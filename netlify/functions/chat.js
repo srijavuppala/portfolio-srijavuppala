@@ -1,6 +1,6 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
@@ -20,7 +20,7 @@ exports.handler = async (event) => {
         ? [
             {
               role: 'user',
-              parts: [{ text: 'You are Srija Vuppala\'s AI assistant. Use this info: ' + systemPrompt }],
+              parts: [{ text: "You are Srija Vuppala's AI assistant. Use this info: " + systemPrompt }],
             },
             {
               role: 'model',

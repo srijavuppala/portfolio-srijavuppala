@@ -62,10 +62,10 @@ export default function Chatbot() {
         return cached.response;
       }
 
-      // Use different API endpoint based on environment
-      const apiUrl = import.meta.env.PROD 
-        ? '/.netlify/functions/chat' 
-        : 'http://localhost:4000/api/chat';
+      // In prod: Netlify Function. In dev: Vite proxy (/api → localhost:3000)
+      const apiUrl = import.meta.env.PROD
+        ? '/.netlify/functions/chat'
+        : '/api/chat';
       
       const response = await fetch(apiUrl, {
         method: 'POST',
