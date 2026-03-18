@@ -22,15 +22,15 @@ const DynamicRoles = () => {
   }, []);
 
   return (
-    <div className="h-12 flex items-center justify-center overflow-hidden">
+    <div className="h-10 flex items-center overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.span
           key={currentRoleIndex}
-          initial={{ y: 20, opacity: 0 }}
+          initial={{ y: 16, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -20, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-2xl md:text-3xl text-primary font-semibold absolute"
+          exit={{ y: -16, opacity: 0 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display text-xl md:text-2xl font-normal text-primary absolute"
         >
           {roles[currentRoleIndex]}
         </motion.span>

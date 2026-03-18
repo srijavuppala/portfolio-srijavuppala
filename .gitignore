@@ -13,8 +13,6 @@ dist-ssr
 *.local
 .env
 .env.*
-netlify/
-netlify.toml
 .netlify/
 .claude/
 .DS_Store

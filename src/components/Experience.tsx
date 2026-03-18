@@ -29,7 +29,7 @@ const experiences = [
     ],
     technologies: ["AI/ML", "Cloud", "DevOps", "Python", "React"],
     icon: <BrainCircuitIcon className="w-5 h-5" />,
-    iconBackground: "#6366F1",
+    iconBackground: "#0D5C63",
     links: [
       { title: "RAG Chatbot", url: "#" },
       { title: "Monitoring System", url: "#" }
@@ -47,7 +47,7 @@ const experiences = [
     ],
     technologies: ["Java", "Spring", "Docker", "Kubernetes", "CI/CD"],
     icon: <MonitorIcon className="w-5 h-5" />,
-    iconBackground: "#0F172A",
+    iconBackground: "#0D5C63",
     links: [
       { title: "Network Tools", url: "#" },
       { title: "Testing Framework", url: "#" }
@@ -89,7 +89,7 @@ const education = [
     ],
     coursework: ["C", "Java", "Python", "Data Structures", "DBMS", "Probability & Statistics", "Computer Networks", "Web Technologies", "Data Mining", "Software Engineering", "Operating Systems"],
     icon: <BookOpenIcon className="w-5 h-5" />,
-    iconBackground: "#4A90E2",
+    iconBackground: "#0D5C63",
     links: [
       { title: "JNTU Official Website", url: "https://jntuh.ac.in/" }
     ]
@@ -104,7 +104,7 @@ const Experience = () => {
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-12 h-0.5 bg-primary"></div>
-            <h2 className="text-2xl font-bold">About</h2>
+            <h2 className="font-display text-2xl font-medium tracking-tight">About</h2>
           </div>
           
           <div className="max-w-4xl">
@@ -126,7 +126,7 @@ const Experience = () => {
         <div className="mb-20">
           <div className="flex items-center gap-4 mb-12">
             <div className="w-12 h-0.5 bg-primary"></div>
-            <h2 className="text-2xl font-bold">Experience</h2>
+            <h2 className="font-display text-2xl font-medium tracking-tight">Experience</h2>
           </div>
           
           <VerticalTimeline lineColor="var(--border)">
@@ -151,7 +151,7 @@ const Experience = () => {
                 <HoverCard>
                   <HoverCardTrigger asChild>
                     <div className="group cursor-pointer">
-                      <h3 className="text-xl font-semibold text-primary mb-1 group-hover:text-accent transition-colors">
+                      <h3 className="text-xl font-semibold text-primary mb-1 group-hover:text-primary transition-colors">
                         {exp.company}
                       </h3>
                       <h4 className="text-lg font-medium mb-2">{exp.role}</h4>
@@ -219,7 +219,7 @@ const Experience = () => {
         <div>
           <div className="flex items-center gap-4 mb-12">
             <div className="w-12 h-0.5 bg-primary"></div>
-            <h2 className="text-2xl font-bold">Education</h2>
+            <h2 className="font-display text-2xl font-medium tracking-tight">Education</h2>
           </div>
           
           <VerticalTimeline lineColor="var(--border)">
@@ -244,7 +244,7 @@ const Experience = () => {
                 <HoverCard>
                   <HoverCardTrigger asChild>
                     <div className="group cursor-pointer">
-                      <h3 className="text-xl font-semibold text-primary mb-1 group-hover:text-accent transition-colors">
+                      <h3 className="text-xl font-semibold text-primary mb-1 group-hover:text-primary transition-colors">
                         {edu.university}
                       </h3>
                       <h4 className="text-lg font-medium mb-2">{edu.degree}</h4>

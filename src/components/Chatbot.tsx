@@ -119,10 +119,10 @@ export default function Chatbot() {
     }
   };
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+  const handleSend = async (overrideMessage?: string) => {
+    const userMessage = (overrideMessage ?? input).trim();
+    if (!userMessage || isLoading) return;
 
-    const userMessage = input.trim();
     setInput('');
     setShowSuggestions(false);
     setError(null);
@@ -152,7 +152,7 @@ export default function Chatbot() {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -229,10 +229,7 @@ export default function Chatbot() {
                   key={index}
                   variant="outline"
                   className="whitespace-nowrap text-sm"
-                  onClick={() => {
-                    setInput(suggestion);
-                    handleSend();
-                  }}
+                  onClick={() => handleSend(suggestion)}
                 >
                   {suggestion}
                 </Button>

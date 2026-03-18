@@ -1,205 +1,175 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 const projects = [
   {
     title: "RAG Chatbot Application",
-    description: "Built using Snowflake, Cortex Search, and Mistral LLM for intelligent document processing and Q&A.",
-    tags: ["AI", "Snowflake", "LLM"],
+    description: "Intelligent document Q&A built with Snowflake Cortex Search and Mistral LLM for contextual, retrieval-augmented responses.",
+    tags: ["AI", "Snowflake", "LLM", "Python"],
     category: "AI & ML",
-    color: "from-blue-500 to-purple-600",
-    github: "https://github.com/srijavuppala/rag_chat_bot"
+    github: "https://github.com/srijavuppala/rag_chat_bot",
+    featured: true,
   },
   {
     title: "ML End-to-End Pipeline",
-    description: "Complete machine learning pipeline from data preprocessing to model deployment, showcasing MLOps practices and automated workflows.",
-    tags: ["Python", "MLOps", "Deployment", "ML"],
+    description: "Complete MLOps pipeline from data preprocessing through model deployment, with automated retraining and monitoring workflows.",
+    tags: ["Python", "MLOps", "Docker", "ML"],
     category: "AI & ML",
-    color: "from-blue-500 to-purple-600",
-    github: "https://github.com/srijavuppala/ml_end_to_end"
+    github: "https://github.com/srijavuppala/ml_end_to_end",
+    featured: true,
   },
   {
     title: "Voice Detection Dashboard",
-    description: "IoT dashboard control system with speech-to-text integration for voice-activated device management and real-time monitoring.",
-    tags: ["IoT", "Speech-to-Text", "Dashboard", "Voice Control"],
+    description: "IoT control system integrating speech-to-text for voice-activated device management with real-time telemetry.",
+    tags: ["IoT", "Speech-to-Text", "React", "WebSockets"],
     category: "IoT & Voice",
-    color: "from-purple-500 to-pink-600",
-    github: "https://github.com/srijavuppala/voice_detect"
+    github: "https://github.com/srijavuppala/voice_detect",
+    featured: false,
   },
   {
     title: "Email Template MCP Server",
-    description: "MCP server for creating customized email templates with dynamic content generation and template management system.",
-    tags: ["MCP", "Email Templates", "Node.js", "Templates"],
+    description: "MCP server enabling dynamic email template generation and management with structured content APIs.",
+    tags: ["MCP", "Node.js", "Templates", "API"],
     category: "Web Apps",
-    color: "from-green-500 to-emerald-600",
-    github: "https://github.com/srijavuppala/email-template"
+    github: "https://github.com/srijavuppala/email-template",
+    featured: false,
   },
   {
     title: "Gesture Detection System",
-    description: "Advanced computer vision system for real-time gesture recognition and interactive control using machine learning models.",
-    tags: ["Computer Vision", "Gesture Recognition", "ML", "Real-time"],
+    description: "Real-time computer vision system for gesture recognition and interactive control using trained ML models.",
+    tags: ["Computer Vision", "OpenCV", "ML", "Python"],
     category: "AI & ML",
-    color: "from-blue-500 to-purple-600",
-    github: "https://github.com/srijavuppala/gesture-detection"
+    github: "https://github.com/srijavuppala/gesture-detection",
+    featured: false,
   },
   {
     title: "Portfolio Website",
-    description: "Modern portfolio website built with React, Vite, and TailwindCSS featuring interactive components and animations.",
-    tags: ["React", "Vite", "TailwindCSS"],
+    description: "This portfolio — built with React, Vite, and Tailwind CSS. Modular component architecture with Framer Motion animations.",
+    tags: ["React", "TypeScript", "Vite", "Tailwind"],
     category: "Web Apps",
-    color: "from-green-500 to-emerald-600",
-    github: "https://github.com/srijavuppala/portfolio-srijavuppala-2"
-  }
+    github: "https://github.com/srijavuppala/portfolio-srijavuppala",
+    featured: false,
+  },
 ];
 
-const filterCategories = [
-  { 
-    name: "All", 
-    count: projects.length, 
-    icon: "🎯",
-    description: "View all projects",
-    gradient: "from-gray-500 to-gray-700"
-  },
-  { 
-    name: "AI & ML", 
-    count: projects.filter(p => p.category === "AI & ML").length, 
-    icon: "🤖",
-    description: "Artificial Intelligence",
-    gradient: "from-blue-500 to-purple-600"
-  },
-  { 
-    name: "Web Apps", 
-    count: projects.filter(p => p.category === "Web Apps").length, 
-    icon: "🌐",
-    description: "Web Applications",
-    gradient: "from-green-500 to-emerald-600"
-  },
-  { 
-    name: "IoT & Voice", 
-    count: projects.filter(p => p.category === "IoT & Voice").length, 
-    icon: "🎤",
-    description: "IoT & Voice Control",
-    gradient: "from-purple-500 to-pink-600"
-  }
-];
+const filters = ["All", "AI & ML", "Web Apps", "IoT & Voice"];
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
-  const [hoveredFilter, setHoveredFilter] = useState<string | null>(null);
 
-  const filteredProjects = activeFilter === "All" 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const filtered = activeFilter === "All"
+    ? projects
+    : projects.filter((p) => p.category === activeFilter);
 
   return (
-    <section className="py-20 px-4 bg-secondary">
+    <section className="py-24 px-6 md:px-12 bg-secondary min-h-screen">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4 text-center text-white">My Projects</h2>
-        <p className="text-center text-muted-foreground mb-12">
-          Explore {projects.length} projects showcasing my skills and experience
-        </p>
-        
-        {/* Enhanced Filter Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
-          {filterCategories.map((category) => (
-            <div
-              key={category.name}
-              className={`relative overflow-hidden rounded-xl transition-all duration-300 cursor-pointer ${
-                activeFilter === category.name ? "scale-105 shadow-xl" : "hover:scale-102 shadow-lg"
-              }`}
-              onClick={() => setActiveFilter(category.name)}
-              onMouseEnter={() => setHoveredFilter(category.name)}
-              onMouseLeave={() => setHoveredFilter(null)}
-            >
-              <div className={`bg-gradient-to-br ${category.gradient} p-6 text-white`}>
-                <div className="text-center">
-                  <div className="text-3xl mb-2">{category.icon}</div>
-                  <h3 className="font-bold text-lg mb-1">{category.name}</h3>
-                  <p className="text-xs opacity-90 mb-2">{category.description}</p>
-                  <div className="bg-white/20 rounded-full px-3 py-1 text-sm font-medium">
-                    {category.count} {category.count === 1 ? 'project' : 'projects'}
-                  </div>
-                </div>
-                {activeFilter === category.name && (
-                  <div className="absolute inset-0 bg-white/10 pointer-events-none" />
-                )}
-              </div>
+
+        {/* Header */}
+        <div className="mb-16">
+          <p className="section-label mb-3">Selected Work</p>
+          <div className="flex items-end justify-between flex-wrap gap-6">
+            <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-foreground">
+              Things I've <em className="italic font-light">built</em>
+            </h2>
+            {/* Filter tabs */}
+            <div className="flex gap-1">
+              {filters.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setActiveFilter(f)}
+                  className={`text-xs font-sans tracking-widest uppercase px-4 py-2 rounded-sm border transition-all duration-200 ${
+                    activeFilter === f
+                      ? 'bg-foreground text-background border-foreground'
+                      : 'bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground'
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* Projects Grid with Category Colors */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project, index) => (
-            <Card 
-              key={index}
-              className="bg-background/95 backdrop-blur hover:bg-background/100 transition-all duration-300 hover:scale-105 group overflow-hidden"
-            >
-              <div className={`h-2 bg-gradient-to-r ${project.color}`} />
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  <Badge 
-                    variant="secondary" 
-                    className={`text-xs bg-gradient-to-r ${project.color} text-white border-none`}
-                  >
-                    {project.category}
-                  </Badge>
-                </div>
-                <CardDescription className="mt-2 text-sm">
-                  {project.description}
-                </CardDescription>
-                <div className="flex gap-2 mt-4 flex-wrap">
-                  {project.tags.map((tag, tagIndex) => (
-                    <Badge key={tagIndex} variant="outline" className="text-xs hover:bg-primary/10 transition-colors">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                {project.github && (
-                  <a 
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-4 text-sm text-primary hover:underline"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/>
-                    </svg>
-                    View on GitHub
-                  </a>
-                )}
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center text-muted-foreground mt-12">
-            <div className="text-6xl mb-4">🔍</div>
-            <p className="text-lg">No projects found in this category.</p>
-            <p className="text-sm">Try selecting a different filter above.</p>
           </div>
-        )}
+        </div>
 
-        {/* Filter Summary */}
-        {activeFilter !== "All" && (
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-center gap-2 bg-background/20 rounded-full px-6 py-3 text-white">
-              <span>Showing {filteredProjects.length} {activeFilter} projects</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setActiveFilter("All")}
-                className="text-white hover:bg-white/20 ml-2"
-              >
-                View All
-              </Button>
-            </div>
+        {/* Grid — asymmetric */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            className="grid grid-cols-1 md:grid-cols-12 gap-4"
+            initial="hidden"
+            animate="visible"
+          >
+            {filtered.map((project, i) => {
+              const isFeatureSized = project.featured && i < 2 && activeFilter === "All";
+              return (
+                <motion.div
+                  key={project.title}
+                  custom={i}
+                  variants={itemVariants}
+                  className={`group bg-background rounded-sm border border-border hover:border-primary/30 transition-all duration-300 overflow-hidden flex flex-col ${
+                    isFeatureSized ? 'md:col-span-6' : 'md:col-span-4'
+                  }`}
+                >
+                  {/* Accent bar */}
+                  <div className="h-px bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  <div className="p-6 flex flex-col flex-1">
+                    {/* Title row */}
+                    <div className="flex items-start justify-between gap-3 mb-3">
+                      <h3 className="font-display text-base font-medium text-foreground leading-snug group-hover:text-primary transition-colors duration-200">
+                        {project.title}
+                      </h3>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="shrink-0 w-7 h-7 flex items-center justify-center text-muted-foreground hover:text-foreground border border-border hover:border-foreground/30 rounded-sm transition-all duration-200 opacity-0 group-hover:opacity-100"
+                        aria-label="View on GitHub"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
+
+                    {/* Category label */}
+                    <p className="text-xs font-sans tracking-widest uppercase text-primary mb-3">{project.category}</p>
+
+                    {/* Description */}
+                    <p className="text-sm font-sans text-muted-foreground leading-relaxed mb-5 flex-1">
+                      {project.description}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs font-sans px-2.5 py-1 bg-secondary text-muted-foreground rounded-sm border border-border"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </AnimatePresence>
+
+        {filtered.length === 0 && (
+          <div className="text-center text-muted-foreground py-24">
+            <p className="font-display text-xl">No projects in this category.</p>
           </div>
         )}
       </div>

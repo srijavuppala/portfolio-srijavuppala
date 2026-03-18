@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { useRef, useState } from 'react';
-import { ArrowRight, Download, Github, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ArrowRight, Github, Linkedin, ExternalLink } from 'lucide-react';
 import DynamicRoles from './DynamicRoles';
 import profilePhoto from '/assets/profile-photo.jpeg';
 
@@ -9,190 +8,161 @@ interface HeroProps {
   onViewProjects?: () => void;
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+};
+
 const Hero = ({ onViewProjects }: HeroProps) => {
   const [photoUrl, setPhotoUrl] = useState<string>(profilePhoto);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleChoosePhoto = () => {
-    fileInputRef.current?.click();
-  };
-
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const objectUrl = URL.createObjectURL(file);
-    setPhotoUrl(objectUrl);
-  };
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-      },
-    },
+    setPhotoUrl(URL.createObjectURL(file));
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary via-background to-primary/10 py-20 px-4 pt-24 overflow-hidden">
-      <motion.div 
-        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
+    <section className="min-h-screen grid md:grid-cols-2 bg-background overflow-hidden">
+      {/* Left — content */}
+      <motion.div
+        className="flex flex-col justify-end pb-20 pt-32 px-8 md:px-12 lg:px-16"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Photo Section */}
-        <motion.div 
-          className="flex justify-center md:justify-end order-2 md:order-1"
+        <motion.p variants={itemVariants} className="section-label mb-5">
+          Full-Stack Engineer · AI · Cloud
+        </motion.p>
+
+        <motion.h1
           variants={itemVariants}
+          className="font-display text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.02] mb-6"
         >
-          <div className="relative group">
-            <motion.div 
-              className="w-80 h-80 rounded-full bg-gradient-to-r from-primary to-secondary p-1"
-              whileHover={{ scale: 1.05, rotate: 5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="w-full h-full rounded-full bg-background flex items-center justify-center shadow-2xl overflow-hidden">
-                <img 
-                  src={photoUrl}
-                  alt="Srija Vuppala"
-                  className="w-72 h-72 rounded-full object-cover"
-                />
-              </div>
-            </motion.div>
+          Building systems<br />
+          that <span className="italic font-light text-primary">think</span><br />
+          and scale.
+        </motion.h1>
 
-            {/* Hidden file input for changing the photo */}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handlePhotoChange}
-            />
-
-            <div className="mt-4 flex justify-center">
-              <Button variant="outline" className="h-8 px-3 text-sm" onClick={handleChoosePhoto}>
-                Change Photo
-              </Button>
-            </div>
-            
-            {/* Floating elements */}
-            <motion.div
-              className="absolute -top-8 -left-8 w-4 h-4 bg-primary/30 rounded-full"
-              animate={{ 
-                y: [0, -10, 0],
-                opacity: [0.3, 0.8, 0.3] 
-              }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            <motion.div
-              className="absolute top-4 -right-12 w-6 h-6 bg-secondary/40 rounded-full"
-              animate={{ 
-                y: [0, 10, 0],
-                opacity: [0.4, 0.9, 0.4] 
-              }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1
-              }}
-            />
-          </div>
+        <motion.div variants={itemVariants} className="mb-6">
+          <DynamicRoles />
         </motion.div>
 
-        {/* Content Section */}
-        <motion.div 
-          className="text-center md:text-left order-1 md:order-2"
+        <motion.p
           variants={itemVariants}
+          className="text-base text-muted-foreground leading-relaxed mb-10 max-w-md font-sans"
         >
-          <motion.h1 
-            className="text-3xl md:text-5xl font-bold text-white mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent leading-tight"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Hi, I'm <span className="text-primary">Srija</span> — 
-            <br />
-            <span className="text-2xl md:text-4xl">passionate about crafting</span>
-          </motion.h1>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            <DynamicRoles />
-          </motion.div>
+          Cloud-native engineer at <span className="text-foreground font-normal">Optum</span> and{' '}
+          <span className="text-foreground font-normal">Ericsson</span>. Pursuing a Master's in
+          Computer Engineering at{' '}
+          <span className="text-foreground font-normal">UT Dallas</span>. I build AI-driven systems,
+          distributed infrastructure, and experiences that hold up under pressure.
+        </motion.p>
 
-          <motion.p 
-            className="text-lg text-muted-foreground mb-12 max-w-2xl mt-8 leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+        <motion.div variants={itemVariants} className="flex items-center gap-4 flex-wrap mb-8">
+          <button
+            onClick={onViewProjects}
+            className="inline-flex items-center gap-2.5 text-xs font-sans font-normal tracking-widest uppercase text-primary-foreground bg-primary px-6 py-3.5 rounded-sm hover:opacity-90 transition-all duration-200 hover:-translate-y-px group"
           >
-            From architecting cloud-native solutions at <span className="text-primary font-semibold">Optum</span> to 
-            building scalable systems at <span className="text-primary font-semibold">Ericsson</span>, I transform 
-            complex challenges into elegant digital experiences. Currently pursuing my Master's at 
-            <span className="text-primary font-semibold"> UT Dallas</span>, I blend academic rigor with 
-            real-world innovation in AI, cloud computing, and full-stack development.
-          </motion.p>
-
-          <motion.div 
-            className="flex gap-4 justify-center md:justify-start flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
+            View Projects
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+          </button>
+          <a
+            href="mailto:srijavuppala11@gmail.com"
+            className="inline-flex items-center gap-2 text-xs font-sans tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            <Button 
-              className="bg-primary hover:bg-primary/90 hover:scale-105 transition-all duration-200 shadow-lg"
-              onClick={() => onViewProjects?.()}
-            >
-              View Projects <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div 
-            className="flex gap-4 justify-center md:justify-start mt-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-          >
-            <Button 
-              variant="ghost" 
-              size="icon"
-              className="hover:scale-110 transition-all duration-200 hover:bg-primary/10"
-              onClick={() => window.open('https://github.com/srijavuppala', '_blank')}
-            >
-              <Github className="h-5 w-5" />
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="icon"
-              className="hover:scale-110 transition-all duration-200 hover:bg-primary/10"
-              onClick={() => window.open('https://www.linkedin.com/in/srija-vuppala/', '_blank')}
-            >
-              <Linkedin className="h-5 w-5" />
-            </Button>
-          </motion.div>
+            Get in Touch
+          </a>
         </motion.div>
+
+        <motion.div variants={itemVariants} className="flex items-center gap-1">
+          <a
+            href="https://github.com/srijavuppala"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-9 h-9 flex items-center justify-center rounded-sm border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-200"
+            aria-label="GitHub"
+          >
+            <Github className="h-4 w-4" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/srija-vuppala/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-9 h-9 flex items-center justify-center rounded-sm border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-200"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="h-4 w-4" />
+          </a>
+          <a
+            href="https://srijavuppala.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-9 h-9 flex items-center justify-center rounded-sm border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-200"
+            aria-label="Website"
+          >
+            <ExternalLink className="h-4 w-4" />
+          </a>
+        </motion.div>
+      </motion.div>
+
+      {/* Right — photo */}
+      <motion.div
+        className="relative hidden md:block overflow-hidden bg-secondary order-last"
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <img
+          src={photoUrl}
+          alt="Srija Vuppala"
+          className="w-full h-full object-cover object-center"
+          style={{ filter: 'grayscale(0.15) contrast(1.05)' }}
+        />
+
+        {/* Hidden file input */}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handlePhotoChange}
+        />
+
+        {/* Floating stat badges */}
+        <motion.div
+          className="absolute top-10 right-8 bg-background/90 backdrop-blur-sm px-4 py-3 border-l-2 border-primary"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="font-display text-2xl font-medium text-foreground leading-none">2+</div>
+          <div className="text-xs font-sans tracking-widest uppercase text-muted-foreground mt-0.5">Years Exp.</div>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-10 left-8 bg-foreground px-4 py-3"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="font-display text-2xl font-medium text-background leading-none">6+</div>
+          <div className="text-xs font-sans tracking-widest uppercase text-background/60 mt-0.5">Projects</div>
+        </motion.div>
+
+        {/* Change photo overlay */}
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          className="absolute bottom-4 right-4 text-xs font-sans tracking-wide text-background/60 hover:text-background transition-colors bg-foreground/40 backdrop-blur-sm px-3 py-1.5 rounded-sm"
+        >
+          Change photo
+        </button>
       </motion.div>
     </section>
   );
