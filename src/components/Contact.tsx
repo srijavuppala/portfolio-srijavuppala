@@ -54,7 +54,7 @@ const Contact = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          access_key: 'a0edfb30-c271-4f6d-addd-9c41af87c863',
           name: `${getValue('firstName')} ${getValue('lastName')}`,
           email: getValue('email'),
           message: getValue('message'),
