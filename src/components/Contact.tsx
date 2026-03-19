@@ -38,6 +38,11 @@ const links = [
   },
 ];
 
+const encode = (data: Record<string, string>) =>
+  Object.entries(data)
+    .map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v))
+    .join('&');
+
 const Contact = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
@@ -45,13 +50,21 @@ const Contact = () => {
     e.preventDefault();
     setStatus('sending');
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const getValue = (name: string) =>
+      (form.querySelector(`[name="${name}"]`) as HTMLInputElement | HTMLTextAreaElement)?.value ?? '';
 
     try {
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+        body: encode({
+          'form-name': 'contact',
+          firstName: getValue('firstName'),
+          lastName: getValue('lastName'),
+          email: getValue('email'),
+          message: getValue('message'),
+        }),
       });
 
       if (response.ok) {
