@@ -62,10 +62,7 @@ export default function Chatbot() {
         return cached.response;
       }
 
-      // In prod: Netlify Function. In dev: Vite proxy (/api → localhost:3000)
-      const apiUrl = import.meta.env.PROD
-        ? '/.netlify/functions/chat'
-        : '/api/chat';
+      const apiUrl = '/.netlify/functions/chat';
       
       const response = await fetch(apiUrl, {
         method: 'POST',
