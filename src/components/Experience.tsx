@@ -109,15 +109,19 @@ const Experience = () => {
           
           <div className="max-w-4xl">
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              I'm a passionate <span className="text-primary font-semibold">full-stack developer</span> and <span className="text-primary font-semibold">DevOps engineer</span> with a knack for building innovative solutions that bridge technology and user needs. Proficient in <span className="text-primary font-semibold">Python, Java, React, Docker, and AWS</span>, I thrive on tackling complex challenges and driving impact through clean code and efficient systems.
+              I'm <span className="text-primary font-semibold">Srija Vuppala</span> — a full-stack engineer and AI/cloud specialist currently pursuing my <span className="text-primary font-semibold">Master's in Computer Engineering at UT Dallas</span> (graduating May 2026). I build systems that are fast, intelligent, and built to last.
             </p>
-            
+
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              My recent experience at <span className="text-primary font-semibold">Optum</span> (Feb-July 2024) and previous role at <span className="text-primary font-semibold">Ericsson</span>, combined with leadership in technical workshops as a <span className="text-primary font-semibold">Microsoft Student Ambassador</span>, fuels my commitment to collaboration and continuous learning.
+              At <span className="text-primary font-semibold">Optum (UnitedHealth Group)</span>, I developed a <span className="text-primary font-semibold">RAG-based AI chatbot</span> using Snowflake and Mistral LLM, built real-time monitoring pipelines, and automated cloud infrastructure at scale. Before that, at <span className="text-primary font-semibold">Ericsson</span>, I engineered network monitoring tools and CI/CD frameworks for telecom-grade software deployed on Docker and Kubernetes.
             </p>
-            
+
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              As a <span className="text-primary font-semibold">Microsoft Student Ambassador</span>, I led technical workshops and mentored peers in cloud and AI — a role that sharpened my belief that the best engineers are also good communicators.
+            </p>
+
             <p className="text-lg text-muted-foreground leading-relaxed">
-              When I'm not coding, I'm exploring <span className="text-primary font-semibold">AI/ML advancements</span> or contributing to <span className="text-primary font-semibold">open-source projects</span> to push the boundaries of tech.
+              My stack spans <span className="text-primary font-semibold">Python, Java, React, TypeScript, AWS, Docker, and Kubernetes</span>. I'm drawn to problems at the intersection of AI and infrastructure — where models need to actually run reliably in production.
             </p>
           </div>
         </div>
