@@ -38,11 +38,6 @@ const links = [
   },
 ];
 
-const encode = (data: Record<string, string>) =>
-  Object.entries(data)
-    .map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v))
-    .join('&');
-
 const Contact = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
@@ -55,19 +50,20 @@ const Contact = () => {
       (form.querySelector(`[name="${name}"]`) as HTMLInputElement | HTMLTextAreaElement)?.value ?? '';
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({
-          'form-name': 'contact',
-          firstName: getValue('firstName'),
-          lastName: getValue('lastName'),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          name: `${getValue('firstName')} ${getValue('lastName')}`,
           email: getValue('email'),
           message: getValue('message'),
+          subject: `Portfolio contact from ${getValue('firstName')} ${getValue('lastName')}`,
         }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
         setStatus('sent');
       } else {
         setStatus('error');
@@ -146,15 +142,9 @@ const Contact = () => {
           </div>
         ) : (
           <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="flex flex-col gap-5"
           >
-            <input type="hidden" name="form-name" value="contact" />
-            <input type="hidden" name="bot-field" />
 
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-1.5">
