@@ -13,6 +13,22 @@ import {
 
 const experiences = [
   {
+    company: "University of Texas at Dallas",
+    role: "Systems Engineer",
+    period: "Oct 2025 – Present",
+    location: "Richardson, TX, USA",
+    description: "Administering enterprise IT infrastructure supporting 25,000+ users across hybrid Red Hat Linux and Windows Server environments.",
+    achievements: [
+      "Administered Red Hat Linux and Windows Server environments, improving system reliability through automated patching and standardized configuration management",
+      "Managed Microsoft 365 and Exchange Online infrastructure, configuring SPF/DKIM/DMARC and mail flow rules to improve email deliverability and reduce spoofing risks",
+      "Deployed and scaled Zabbix monitoring across servers and network systems; integrated InCommon to automate SSL/TLS certificate lifecycle management",
+      "Built Splunk dashboards and alerting pipelines for log aggregation and security event analysis, improving anomaly detection and root-cause analysis",
+      "Designed and evaluated Comet AI support agent by building prompt workflows and agentic pipelines for ticketing and documentation — improved first-touch resolution and reduced support escalations",
+    ],
+    technologies: ["Red Hat Linux", "Windows Server", "Microsoft 365", "Exchange Online", "Zabbix", "Splunk", "SPF/DKIM/DMARC", "InCommon"],
+    icon: <BrainCircuitIcon className="w-4 h-4" />,
+  },
+  {
     company: "Optum (UnitedHealth Group)",
     role: "AI & Cloud Engineer",
     period: "Feb 2024 – Jul 2024",
