@@ -66,7 +66,7 @@ const projects = [
     title: "Voice Detection Dashboard",
     description: "IoT control system integrating speech-to-text for voice-activated device management with real-time telemetry.",
     tags: ["IoT", "Speech-to-Text", "React", "WebSockets"],
-    category: "IoT & Voice",
+    category: "Hardware",
     github: "https://github.com/srijavuppala/voice_detect",
     featured: false,
   },
@@ -156,7 +156,7 @@ const projects = [
   },
 ];
 
-const filters = ["All", "AI & ML", "Hardware", "Research", "Hackathon", "Web Apps", "IoT & Voice"];
+const filters = ["All", "AI & ML", "Hardware", "Research", "Hackathon", "Web Apps"];
 
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
