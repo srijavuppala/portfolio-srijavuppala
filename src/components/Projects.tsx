@@ -130,14 +130,6 @@ const projects = [
     featured: false,
   },
   {
-    title: "Hardware Research Assistant",
-    description: "Investigates ML algorithms on RTOS to identify energy-efficient hardware architectures for edge computing. Built Python/TensorFlow/scikit-learn framework to predict transistor sizing and power-delay tradeoffs. Applied RL to optimize layout configurations — reduced manual design iterations by 35%.",
-    tags: ["Python", "TensorFlow", "scikit-learn", "RTOS", "Reinforcement Learning"],
-    category: "Hardware",
-    github: "https://github.com/srijavuppala",
-    featured: false,
-  },
-  {
     title: "Automotive ECU — Toyota Hack Festa 2024",
     description: "Developed embedded C firmware for automotive ECU with CAN bus communication protocol. Implemented hardware-software co-design for real-time control with strict timing requirements, automated ECU validation frameworks, and fault-tolerant sensor/actuator integration.",
     tags: ["Embedded C", "CAN Bus", "ECU", "RTOS", "Automotive"],
