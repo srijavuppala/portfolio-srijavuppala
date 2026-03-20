@@ -40,7 +40,7 @@ const projects = [
     description: "Multi-agent AI system built on Amazon Nova that detects post-delivery friction and intervenes before dissatisfaction escalates into a return.",
     tags: ["Amazon Nova", "AWS", "AI Agents", "Python"],
     category: "Hackathon",
-    devpost: "https://devpost.com/srijavuppala11",
+    devpost: "https://devpost.com/software/insanity-",
     github: "https://github.com/srijavuppala",
     featured: false,
   },
@@ -65,7 +65,7 @@ const projects = [
   {
     title: "Voice Detection Dashboard",
     description: "IoT control system integrating speech-to-text for voice-activated device management with real-time telemetry.",
-    tags: ["IoT", "Speech-to-Text", "React", "WebSockets"],
+    tags: ["Speech-to-Text", "React", "WebSockets", "Embedded"],
     category: "Hardware",
     github: "https://github.com/srijavuppala/voice_detect",
     featured: false,
@@ -117,7 +117,7 @@ const projects = [
     title: "ML-Based Hardware Architecture Predictor for Edge AI",
     description: "Neural network predictors estimating power and performance for ASIC architectures targeting edge AI deployment. Integrated ML predictions with HSPICE simulations and unit tests; reduced design time by 25% through early-stage architecture selection.",
     tags: ["Python", "TensorFlow", "HSPICE", "ML", "ASIC"],
-    category: "Hardware",
+    category: "Research",
     github: "https://github.com/srijavuppala",
     featured: false,
   },
@@ -141,7 +141,7 @@ const projects = [
     title: "Agentic Multimodal Pipeline for Verified Hardware Generation",
     description: "End-to-end hardware agent generating synthesizable RTL from text, PDF, audio, and video specs. Two-oracle verification strategy (spec-derived + smoke testbench) with Verilator, Yosys, SymbiYosys, ngspice, and OpenSTA. Significantly outperforms direct LLM prompting on verified RTL success rate.",
     tags: ["Gemini AI", "SystemVerilog", "Verilator", "Yosys", "SymbiYosys"],
-    category: "Hardware",
+    category: "Research",
     github: "https://github.com/srijavuppala/rtl_agent",
     featured: true,
   },
@@ -149,13 +149,13 @@ const projects = [
     title: "SuperGate-Net: CDM Logic Neural Networks for Low-Power Inference",
     description: "Maps sparse quantized MLPs to CDM-inspired 4-input XOR/XNOR super-gates at 28nm CMOS. Analytical model shows 80% lower transistor count, 87–94% lower dynamic power, and up to 89× better figure of merit vs baseline. Achieves 97.9% accuracy on network intrusion detection (UNSW-NB15).",
     tags: ["28nm CMOS", "Neural Networks", "XOR/XNOR", "VLSI", "Logic Synthesis"],
-    category: "Hardware",
+    category: "Research",
     github: "https://github.com/srijavuppala",
     featured: true,
   },
 ];
 
-const filters = ["All", "AI & ML", "Hardware", "Hackathon", "Web Apps"];
+const filters = ["All", "AI & ML", "Research", "Hardware", "Hackathon", "Web Apps"];
 
 const itemVariants = {
   hidden: { opacity: 0, y: 12 },

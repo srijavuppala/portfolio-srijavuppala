@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Badge } from "@/components/ui/badge";
 import {
@@ -11,6 +11,8 @@ import {
   MapPinIcon,
 } from 'lucide-react';
 
+const ParticlesBg = lazy(() => import('./three/ParticlesBg'));
+
 const experiences = [
   {
     company: "University of Texas at Dallas",
@@ -19,11 +21,11 @@ const experiences = [
     location: "Richardson, TX, USA",
     description: "Administering enterprise IT infrastructure supporting 25,000+ users across hybrid Red Hat Linux and Windows Server environments.",
     achievements: [
-      "Administered Red Hat Linux and Windows Server environments, improving system reliability through automated patching and standardized configuration management",
-      "Managed Microsoft 365 and Exchange Online infrastructure, configuring SPF/DKIM/DMARC and mail flow rules to improve email deliverability and reduce spoofing risks",
-      "Deployed and scaled Zabbix monitoring across servers and network systems; integrated InCommon to automate SSL/TLS certificate lifecycle management",
-      "Built Splunk dashboards and alerting pipelines for log aggregation and security event analysis, improving anomaly detection and root-cause analysis",
-      "Designed and evaluated Comet AI support agent by building prompt workflows and agentic pipelines for ticketing and documentation — improved first-touch resolution and reduced support escalations",
+      "Administered Red Hat Linux and Windows Server environments supporting 25,000+ users, improving system reliability through automated patching cycles and standardized configuration management across hybrid infrastructure.",
+      "Managed Microsoft 365 and enterprise email infrastructure, configuring Exchange Online, SPF/DKIM/DMARC, and mail flow rules to improve email deliverability, security compliance, and reduce spoofing risks across university domains.",
+      "Deployed and scaled Zabbix monitoring across servers and network systems, enabling proactive alerting and reducing incident response time; integrated with InCommon to automate SSL/TLS certificate lifecycle management.",
+      "Built Splunk dashboards and alerting pipelines for log aggregation and security event analysis, enabling faster anomaly detection and improving root-cause analysis for production incidents.",
+      "Designed and evaluated AI-powered support agent (Comet AI) by building prompt workflows and testing across diverse user scenarios, improving first-touch resolution accuracy and reducing support escalations.",
     ],
     technologies: ["Red Hat Linux", "Windows Server", "Microsoft 365", "Exchange Online", "Zabbix", "Splunk", "SPF/DKIM/DMARC", "InCommon"],
     icon: <BrainCircuitIcon className="w-4 h-4" />,
@@ -216,27 +218,30 @@ const TimelineCard = ({
 
 const Experience = () => {
   return (
-    <section className="py-20 px-4 bg-background">
-      <div className="max-w-3xl mx-auto">
+    <section className="relative py-20 px-4 bg-background overflow-hidden">
+      {/* Subtle 3D floating dots background */}
+      <Suspense fallback={null}>
+        <ParticlesBg count={35} opacity={0.22} speed={0.006} />
+      </Suspense>
+
+      <div className="relative z-10 max-w-3xl mx-auto">
 
         {/* About */}
         <div className="mb-16">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-0.5 bg-primary" />
-            <h2 className="font-display text-2xl font-medium tracking-tight">About</h2>
-          </div>
+          <p className="section-label mb-5">Full-Stack Engineer · AI · Cloud</p>
+          <h1 className="font-display text-4xl sm:text-5xl font-medium tracking-tight text-foreground leading-[1.05] mb-6">
+            Building systems<br />
+            that <span className="italic font-light text-primary">think</span><br />
+            and scale.
+          </h1>
+          <p className="text-xs font-sans tracking-widest uppercase text-muted-foreground mb-8">Product Developer</p>
           <div className="space-y-4">
             <p className="text-base text-muted-foreground leading-relaxed">
-              I'm <span className="text-foreground font-medium">Srija Vuppala</span> — a full-stack engineer and AI/cloud specialist pursuing my{' '}
-              <span className="text-foreground font-medium">Master's in Computer Engineering at UT Dallas</span> (graduating May 2026). I build systems that are fast, intelligent, and built to last.
-            </p>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              At <span className="text-foreground font-medium">Optum</span>, I built a RAG-based AI chatbot with Snowflake and Mistral LLM and automated cloud infrastructure at scale. At{' '}
-              <span className="text-foreground font-medium">Ericsson</span>, I engineered network monitoring tools and CI/CD pipelines on Docker and Kubernetes.
-            </p>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              As a <span className="text-foreground font-medium">Microsoft Student Ambassador</span>, I led technical workshops and mentored peers in cloud and AI. My stack spans{' '}
-              <span className="text-foreground font-medium">Python, Java, React, TypeScript, AWS, Docker, and Kubernetes</span>.
+              Cloud-native engineer at <span className="text-foreground font-medium">Optum</span> and{' '}
+              <span className="text-foreground font-medium">Ericsson</span>. Pursuing a Master's in
+              Computer Engineering at{' '}
+              <span className="text-foreground font-medium">UT Dallas</span>. I build AI-driven systems,
+              distributed infrastructure, and experiences that hold up under pressure.
             </p>
           </div>
         </div>

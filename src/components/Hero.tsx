@@ -1,8 +1,10 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Github, Linkedin, ExternalLink } from 'lucide-react';
 import DynamicRoles from './DynamicRoles';
 import profilePhoto from '/assets/profile-photo.jpeg';
+
+const NeuralNetworkBg = lazy(() => import('./three/NeuralNetworkBg'));
 
 interface HeroProps {
   onViewProjects?: () => void;
@@ -29,10 +31,15 @@ const Hero = ({ onViewProjects }: HeroProps) => {
   };
 
   return (
-    <section className="min-h-screen grid md:grid-cols-2 bg-background overflow-hidden touch-manipulation">
+    <section className="relative min-h-screen grid md:grid-cols-2 bg-background overflow-hidden touch-manipulation">
+      {/* 3D neural network constellation background */}
+      <Suspense fallback={null}>
+        <NeuralNetworkBg />
+      </Suspense>
+
       {/* Left — content */}
       <motion.div
-        className="flex flex-col justify-end pb-20 pt-28 md:pt-32 px-6 md:px-12 lg:px-16"
+        className="relative z-10 flex flex-col justify-end pb-20 pt-28 md:pt-32 px-6 md:px-12 lg:px-16"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -114,7 +121,7 @@ const Hero = ({ onViewProjects }: HeroProps) => {
 
       {/* Right — photo */}
       <motion.div
-        className="relative block overflow-hidden bg-secondary order-first md:order-last h-72 sm:h-80 md:h-auto"
+        className="relative z-10 block overflow-hidden bg-secondary order-first md:order-last h-72 sm:h-80 md:h-auto"
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
