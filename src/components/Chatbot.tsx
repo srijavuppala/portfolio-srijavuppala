@@ -159,7 +159,7 @@ export default function Chatbot() {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {isOpen ? (
-        <Card className="w-[400px] h-[600px] flex flex-col bg-background/95 backdrop-blur-sm border border-primary/20 shadow-xl">
+        <Card className="w-[400px] h-[600px] flex flex-col bg-card border border-primary/20 shadow-xl">
           <div className="p-6 border-b bg-transparent text-primary flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="relative">
@@ -187,7 +187,7 @@ export default function Chatbot() {
               {error}
             </div>
           )}
-          <div className="flex-1 overflow-auto p-4 space-y-4">
+          <div className="flex-1 overflow-auto p-4 space-y-4 bg-card">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -198,7 +198,7 @@ export default function Chatbot() {
                 <div
                   className={`max-w-[80%] p-3 rounded-lg ${
                     message.role === 'user'
-                      ? 'bg-primary text-white'
+                      ? 'bg-primary text-primary-foreground dark:bg-zinc-700 dark:text-white'
                       : 'bg-muted text-foreground'
                   }`}
                 >
@@ -225,7 +225,7 @@ export default function Chatbot() {
                 <Button
                   key={index}
                   variant="outline"
-                  className="whitespace-nowrap text-sm"
+                  className="whitespace-nowrap text-sm dark:bg-secondary dark:text-foreground dark:border-border dark:hover:bg-muted"
                   onClick={() => handleSend(suggestion)}
                 >
                   {suggestion}
@@ -242,10 +242,10 @@ export default function Chatbot() {
               className="flex-1"
               disabled={isLoading}
             />
-            <Button 
+            <Button
               onClick={handleSend}
               disabled={isLoading || !input.trim()}
-              className="bg-primary text-white hover:bg-primary/90 min-w-[60px]"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-zinc-700 dark:text-white dark:hover:bg-zinc-600 min-w-[60px]"
             >
               {isLoading ? '...' : 'Send'}
             </Button>
