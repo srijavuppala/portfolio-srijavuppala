@@ -3,7 +3,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
@@ -86,22 +85,18 @@ const App = () => {
             {sections.map((section) => {
               const Component = section.component;
               return (
-                <motion.section
+                <section
                   key={section.id}
                   ref={(el) => {
                     sectionsRef.current[section.id] = el;
                   }}
                   data-section={section.id}
                   className="min-h-screen"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: false, amount: 0.3 }}
                 >
                   <Component 
                     onViewProjects={section.id === 'portfolio' ? handleViewProjects : undefined}
                   />
-                </motion.section>
+                </section>
               );
             })}
           </div>

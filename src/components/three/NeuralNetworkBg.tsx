@@ -22,8 +22,8 @@ const DEPTH = 6;               // z spread
 const CONNECT_DIST = 3.2;      // connection threshold (world units)
 const CONNECT_DIST_SQ = CONNECT_DIST * CONNECT_DIST;
 
-// primary color: teal hsl(184 65% 22%) ≈ #135f63
-const PRIMARY = '#135f63';
+// neutral color that works on both light and dark backgrounds
+const PRIMARY = '#888888';
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 function getParticleCount(): number {

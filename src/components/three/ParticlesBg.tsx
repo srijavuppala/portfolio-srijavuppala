@@ -100,7 +100,7 @@ interface ParticlesBgProps {
 
 export default function ParticlesBg({
   count  = 40,
-  color  = '#135f63',
+  color  = '#888888',
   opacity = 0.3,
   speed  = 0.008,
   area   = 22,

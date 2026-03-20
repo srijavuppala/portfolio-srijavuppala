@@ -75,14 +75,14 @@ const Contact = () => {
 
   return (
     <section className="grid md:grid-cols-2 min-h-screen">
-      {/* Left — dark panel */}
-      <div className="bg-foreground text-background px-8 md:px-12 py-24 flex flex-col justify-between">
+      {/* Left — panel */}
+      <div className="bg-secondary text-foreground px-6 md:px-12 py-16 md:py-24 flex flex-col justify-between border-r border-border">
         <div>
-          <p className="text-xs font-sans tracking-widest uppercase text-background/50 mb-4">Get in Touch</p>
+          <p className="text-xs font-sans tracking-widest uppercase text-muted-foreground mb-4">Get in Touch</p>
           <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight leading-tight mb-6">
-            Let's build<br />something<br /><em className="italic font-light text-primary">together.</em>
+            Let's build<br />something<br /><em className="italic font-light text-foreground/70">together.</em>
           </h2>
-          <p className="text-sm font-sans text-background/60 leading-relaxed max-w-sm mb-10">
+          <p className="text-sm font-sans text-muted-foreground leading-relaxed max-w-sm mb-10">
             Open to full-time roles, research collaborations, and interesting engineering problems.
             If you have something worth building, I'd like to hear about it.
           </p>
@@ -101,14 +101,14 @@ const Contact = () => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="group flex items-center gap-3 text-sm font-sans text-background/60 hover:text-background transition-all duration-200"
+                  className="group flex items-center gap-3 text-sm font-sans text-muted-foreground hover:text-foreground transition-all duration-200"
                 >
-                  <Icon className="h-4 w-4 text-primary flex-shrink-0" />
+                  <Icon className="h-4 w-4 text-foreground/50 flex-shrink-0" />
                   <div>
                     <span className="block group-hover:translate-x-1 transition-transform duration-200">
                       {link.label}
                     </span>
-                    <span className="text-xs text-background/30">{link.sublabel}</span>
+                    <span className="text-xs text-muted-foreground/50">{link.sublabel}</span>
                   </div>
                 </motion.a>
               );
@@ -116,13 +116,13 @@ const Contact = () => {
           </div>
         </div>
 
-        <p className="text-xs font-sans text-background/30 tracking-wide mt-16">
+        <p className="text-xs font-sans text-muted-foreground/40 tracking-wide mt-16">
           © 2025 Srija Vuppala · Dallas, TX
         </p>
       </div>
 
       {/* Right — form */}
-      <div className="bg-background px-8 md:px-12 py-24 flex flex-col justify-center">
+      <div className="bg-background px-6 md:px-12 py-16 md:py-24 flex flex-col justify-center">
         <p className="section-label mb-2">New Message</p>
         <h3 className="font-display text-2xl font-medium tracking-tight text-foreground mb-8">
           Send a direct note
@@ -146,7 +146,7 @@ const Contact = () => {
             className="flex flex-col gap-5"
           >
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-sans tracking-widest uppercase text-muted-foreground">First Name</label>
                 <input
@@ -200,7 +200,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="font-sans text-xs tracking-widest uppercase text-primary-foreground bg-foreground rounded-sm py-3.5 px-6 hover:bg-primary transition-colors duration-200 hover:-translate-y-px transform disabled:opacity-60 disabled:cursor-not-allowed"
+              className="font-sans text-xs tracking-widest uppercase text-background bg-primary rounded-sm py-3.5 px-6 hover:opacity-80 transition-all duration-200 hover:-translate-y-px transform disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>

@@ -1,8 +1,7 @@
-import { useRef, useState, Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Github, Linkedin, ExternalLink } from 'lucide-react';
 import DynamicRoles from './DynamicRoles';
-import profilePhoto from '/assets/profile-photo.jpeg';
 
 const NeuralNetworkBg = lazy(() => import('./three/NeuralNetworkBg'));
 
@@ -21,25 +20,16 @@ const itemVariants = {
 };
 
 const Hero = ({ onViewProjects }: HeroProps) => {
-  const [photoUrl, setPhotoUrl] = useState<string>(profilePhoto);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setPhotoUrl(URL.createObjectURL(file));
-  };
-
   return (
-    <section className="relative min-h-screen grid md:grid-cols-2 bg-background overflow-hidden touch-manipulation">
+    <section className="relative min-h-screen flex items-center bg-background overflow-hidden touch-manipulation">
       {/* 3D neural network constellation background */}
       <Suspense fallback={null}>
         <NeuralNetworkBg />
       </Suspense>
 
-      {/* Left — content */}
+      {/* Content — centered full width */}
       <motion.div
-        className="relative z-10 flex flex-col justify-end pb-20 pt-28 md:pt-32 px-6 md:px-12 lg:px-16"
+        className="relative z-10 flex flex-col justify-center w-full max-w-4xl mx-auto px-6 md:px-12 lg:px-16 py-32"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -50,7 +40,7 @@ const Hero = ({ onViewProjects }: HeroProps) => {
 
         <motion.h1
           variants={itemVariants}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.02] mb-6"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight text-foreground leading-[1.02] mb-6"
         >
           Building systems<br />
           that <span className="italic font-light text-primary">think</span><br />
@@ -63,7 +53,7 @@ const Hero = ({ onViewProjects }: HeroProps) => {
 
         <motion.p
           variants={itemVariants}
-          className="text-base text-muted-foreground leading-relaxed mb-10 max-w-md font-sans"
+          className="text-base text-muted-foreground leading-relaxed mb-10 max-w-xl font-sans"
         >
           Cloud-native engineer at <span className="text-foreground font-normal">Optum</span> and{' '}
           <span className="text-foreground font-normal">Ericsson</span>. Pursuing a Master's in
@@ -72,7 +62,7 @@ const Hero = ({ onViewProjects }: HeroProps) => {
           distributed infrastructure, and experiences that hold up under pressure.
         </motion.p>
 
-        <motion.div variants={itemVariants} className="flex items-center gap-4 flex-wrap mb-8">
+        <motion.div variants={itemVariants} className="flex items-center gap-4 flex-wrap mb-10">
           <button
             onClick={onViewProjects}
             className="inline-flex items-center gap-2.5 text-xs font-sans font-normal tracking-widest uppercase text-primary-foreground bg-primary px-6 py-3.5 rounded-sm hover:opacity-90 transition-all duration-200 hover:-translate-y-px group"
@@ -88,7 +78,7 @@ const Hero = ({ onViewProjects }: HeroProps) => {
           </a>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="flex items-center gap-1">
+        <motion.div variants={itemVariants} className="flex items-center gap-3">
           <a
             href="https://github.com/srijavuppala"
             target="_blank"
@@ -116,60 +106,18 @@ const Hero = ({ onViewProjects }: HeroProps) => {
           >
             <ExternalLink className="h-4 w-4" />
           </a>
+
+          <div className="ml-6 flex items-center gap-6 border-l border-border pl-6">
+            <div>
+              <div className="font-display text-xl font-medium text-foreground leading-none">2+</div>
+              <div className="text-xs font-sans tracking-widest uppercase text-muted-foreground mt-0.5">Years Exp.</div>
+            </div>
+            <div>
+              <div className="font-display text-xl font-medium text-foreground leading-none">6+</div>
+              <div className="text-xs font-sans tracking-widest uppercase text-muted-foreground mt-0.5">Projects</div>
+            </div>
+          </div>
         </motion.div>
-      </motion.div>
-
-      {/* Right — photo */}
-      <motion.div
-        className="relative z-10 block overflow-hidden bg-secondary order-first md:order-last h-72 sm:h-80 md:h-auto"
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <img
-          src={photoUrl}
-          alt="Srija Vuppala"
-          className="w-full h-full object-cover object-center"
-          style={{ filter: 'grayscale(0.15) contrast(1.05)' }}
-        />
-
-        {/* Hidden file input */}
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          className="hidden"
-          onChange={handlePhotoChange}
-        />
-
-        {/* Floating stat badges */}
-        <motion.div
-          className="absolute top-4 md:top-10 right-4 md:right-8 bg-background/90 backdrop-blur-sm px-3 md:px-4 py-2 md:py-3 border-l-2 border-primary"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="font-display text-lg md:text-2xl font-medium text-foreground leading-none">2+</div>
-          <div className="text-xs font-sans tracking-widest uppercase text-muted-foreground mt-0.5">Years Exp.</div>
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-4 md:bottom-10 left-4 md:left-8 bg-foreground px-3 md:px-4 py-2 md:py-3"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="font-display text-lg md:text-2xl font-medium text-background leading-none">6+</div>
-          <div className="text-xs font-sans tracking-widest uppercase text-background/60 mt-0.5">Projects</div>
-        </motion.div>
-
-        {/* Change photo overlay */}
-        <button
-          onClick={() => fileInputRef.current?.click()}
-          className="hidden md:block absolute bottom-4 right-4 text-xs font-sans tracking-wide text-background/60 hover:text-background transition-colors bg-foreground/40 backdrop-blur-sm px-3 py-1.5 rounded-sm"
-        >
-          Change photo
-        </button>
       </motion.div>
     </section>
   );
