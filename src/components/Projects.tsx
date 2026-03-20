@@ -185,7 +185,7 @@ const Projects = () => {
               Things I've <em className="italic font-light">built</em>
             </h2>
             {/* Filter tabs */}
-            <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-none -mx-6 px-6 md:mx-0 md:px-0 md:flex-wrap md:overflow-visible">
+            <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-none md:flex-wrap md:overflow-visible">
               {filters.map((f) => (
                 <button
                   key={f}
@@ -239,7 +239,7 @@ const Projects = () => {
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">
+                      <div className="flex items-center gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 shrink-0">
                         {(project as any).devpost && (
                           <a
                             href={(project as any).devpost}
