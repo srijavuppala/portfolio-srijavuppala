@@ -29,10 +29,10 @@ const Hero = ({ onViewProjects }: HeroProps) => {
   };
 
   return (
-    <section className="min-h-screen grid md:grid-cols-2 bg-background overflow-hidden">
+    <section className="min-h-screen grid md:grid-cols-2 bg-background overflow-hidden touch-manipulation">
       {/* Left — content */}
       <motion.div
-        className="flex flex-col justify-end pb-20 pt-32 px-8 md:px-12 lg:px-16"
+        className="flex flex-col justify-end pb-20 pt-28 md:pt-32 px-6 md:px-12 lg:px-16"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -43,7 +43,7 @@ const Hero = ({ onViewProjects }: HeroProps) => {
 
         <motion.h1
           variants={itemVariants}
-          className="font-display text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.02] mb-6"
+          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.02] mb-6"
         >
           Building systems<br />
           that <span className="italic font-light text-primary">think</span><br />
@@ -114,7 +114,7 @@ const Hero = ({ onViewProjects }: HeroProps) => {
 
       {/* Right — photo */}
       <motion.div
-        className="relative hidden md:block overflow-hidden bg-secondary order-last"
+        className="relative block overflow-hidden bg-secondary order-first md:order-last h-72 sm:h-80 md:h-auto"
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -137,29 +137,29 @@ const Hero = ({ onViewProjects }: HeroProps) => {
 
         {/* Floating stat badges */}
         <motion.div
-          className="absolute top-10 right-8 bg-background/90 backdrop-blur-sm px-4 py-3 border-l-2 border-primary"
+          className="absolute top-4 md:top-10 right-4 md:right-8 bg-background/90 backdrop-blur-sm px-3 md:px-4 py-2 md:py-3 border-l-2 border-primary"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="font-display text-2xl font-medium text-foreground leading-none">2+</div>
+          <div className="font-display text-lg md:text-2xl font-medium text-foreground leading-none">2+</div>
           <div className="text-xs font-sans tracking-widest uppercase text-muted-foreground mt-0.5">Years Exp.</div>
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-8 bg-foreground px-4 py-3"
+          className="absolute bottom-4 md:bottom-10 left-4 md:left-8 bg-foreground px-3 md:px-4 py-2 md:py-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="font-display text-2xl font-medium text-background leading-none">6+</div>
+          <div className="font-display text-lg md:text-2xl font-medium text-background leading-none">6+</div>
           <div className="text-xs font-sans tracking-widest uppercase text-background/60 mt-0.5">Projects</div>
         </motion.div>
 
         {/* Change photo overlay */}
         <button
           onClick={() => fileInputRef.current?.click()}
-          className="absolute bottom-4 right-4 text-xs font-sans tracking-wide text-background/60 hover:text-background transition-colors bg-foreground/40 backdrop-blur-sm px-3 py-1.5 rounded-sm"
+          className="hidden md:block absolute bottom-4 right-4 text-xs font-sans tracking-wide text-background/60 hover:text-background transition-colors bg-foreground/40 backdrop-blur-sm px-3 py-1.5 rounded-sm"
         >
           Change photo
         </button>
