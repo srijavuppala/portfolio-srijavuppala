@@ -79,14 +79,6 @@ const projects = [
     featured: false,
   },
   {
-    title: "Gesture Detection System",
-    description: "Real-time computer vision system for gesture recognition and interactive control using trained ML models.",
-    tags: ["Computer Vision", "OpenCV", "ML", "Python"],
-    category: "AI & ML",
-    github: "https://github.com/srijavuppala/gesture-detection",
-    featured: false,
-  },
-  {
     title: "Portfolio Website",
     description: "This portfolio — built with React, Vite, and Tailwind CSS. Modular component architecture with Framer Motion animations.",
     tags: ["React", "TypeScript", "Vite", "Tailwind"],
