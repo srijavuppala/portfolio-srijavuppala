@@ -1,7 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Github, Linkedin, ExternalLink } from 'lucide-react';
-import DynamicRoles from './DynamicRoles';
 
 const NeuralNetworkBg = lazy(() => import('./three/NeuralNetworkBg'));
 
@@ -46,10 +45,6 @@ const Hero = ({ onViewProjects }: HeroProps) => {
           that <span className="italic font-light text-primary">think</span><br />
           and scale.
         </motion.h1>
-
-        <motion.div variants={itemVariants} className="mb-6">
-          <DynamicRoles />
-        </motion.div>
 
         <motion.p
           variants={itemVariants}
