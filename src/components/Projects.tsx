@@ -137,12 +137,11 @@ const projects = [
     github: "https://github.com/srijavuppala",
     featured: false,
   },
-  // Research
   {
     title: "Agentic Multimodal Pipeline for Verified Hardware Generation",
     description: "End-to-end hardware agent generating synthesizable RTL from text, PDF, audio, and video specs. Two-oracle verification strategy (spec-derived + smoke testbench) with Verilator, Yosys, SymbiYosys, ngspice, and OpenSTA. Significantly outperforms direct LLM prompting on verified RTL success rate.",
     tags: ["Gemini AI", "SystemVerilog", "Verilator", "Yosys", "SymbiYosys"],
-    category: "Research",
+    category: "Hardware",
     github: "https://github.com/srijavuppala/rtl_agent",
     featured: true,
   },
@@ -150,13 +149,13 @@ const projects = [
     title: "SuperGate-Net: CDM Logic Neural Networks for Low-Power Inference",
     description: "Maps sparse quantized MLPs to CDM-inspired 4-input XOR/XNOR super-gates at 28nm CMOS. Analytical model shows 80% lower transistor count, 87–94% lower dynamic power, and up to 89× better figure of merit vs baseline. Achieves 97.9% accuracy on network intrusion detection (UNSW-NB15).",
     tags: ["28nm CMOS", "Neural Networks", "XOR/XNOR", "VLSI", "Logic Synthesis"],
-    category: "Research",
+    category: "Hardware",
     github: "https://github.com/srijavuppala",
     featured: true,
   },
 ];
 
-const filters = ["All", "AI & ML", "Hardware", "Research", "Hackathon", "Web Apps"];
+const filters = ["All", "AI & ML", "Hardware", "Hackathon", "Web Apps"];
 
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
