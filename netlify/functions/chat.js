@@ -10,6 +10,10 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: JSON.stringify({ error: 'Message is required' }) };
     }
 
+    if (!process.env.GEMINI_API_KEY) {
+      return { statusCode: 500, body: JSON.stringify({ error: 'API key not configured' }) };
+    }
+
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`;
 
     const contents = [];
@@ -28,12 +32,25 @@ exports.handler = async (event) => {
       }),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.status}`);
+      console.error('Gemini API error:', JSON.stringify(data));
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: `Gemini API error: ${data?.error?.message || response.status}` }),
+      };
     }
 
-    const data = await response.json();
-    const text = data.candidates[0].content.parts[0].text;
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!text) {
+      console.error('Unexpected Gemini response:', JSON.stringify(data));
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'No response from AI' }),
+      };
+    }
 
     return {
       statusCode: 200,
@@ -41,10 +58,10 @@ exports.handler = async (event) => {
       body: JSON.stringify({ response: text }),
     };
   } catch (error) {
-    console.error('Chat function error:', error);
+    console.error('Chat function error:', error.message);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to generate response' }),
+      body: JSON.stringify({ error: error.message || 'Failed to generate response' }),
     };
   }
 };
