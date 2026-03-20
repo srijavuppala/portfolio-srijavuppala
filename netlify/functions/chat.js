@@ -1,5 +1,3 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
@@ -12,27 +10,30 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: JSON.stringify({ error: 'Message is required' }) };
     }
 
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`;
 
-    const chat = model.startChat({
-      history: systemPrompt
-        ? [
-            {
-              role: 'user',
-              parts: [{ text: "You are Srija Vuppala's AI assistant. Use this info: " + systemPrompt }],
-            },
-            {
-              role: 'model',
-              parts: [{ text: "Hi! I'm Srija's AI assistant. Ask me anything about her background!" }],
-            },
-          ]
-        : [],
-      generationConfig: { maxOutputTokens: 512, temperature: 0.7 },
+    const contents = [];
+    if (systemPrompt) {
+      contents.push({ role: 'user', parts: [{ text: "You are Srija Vuppala's AI assistant. Use this info: " + systemPrompt }] });
+      contents.push({ role: 'model', parts: [{ text: "Hi! I'm Srija's AI assistant. Ask me anything about her background!" }] });
+    }
+    contents.push({ role: 'user', parts: [{ text: message }] });
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents,
+        generationConfig: { maxOutputTokens: 512, temperature: 0.7 },
+      }),
     });
 
-    const result = await chat.sendMessage(message);
-    const text = result.response.text();
+    if (!response.ok) {
+      throw new Error(`Gemini API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const text = data.candidates[0].content.parts[0].text;
 
     return {
       statusCode: 200,
