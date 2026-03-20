@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useTheme } from "@/hooks/useTheme";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -44,6 +45,8 @@ export default function Chatbot() {
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -198,8 +201,8 @@ export default function Chatbot() {
                 <div
                   className={`max-w-[80%] p-3 rounded-lg ${
                     message.role === 'user'
-                      ? 'bg-primary text-primary-foreground dark:bg-zinc-700 dark:text-white'
-                      : 'bg-muted text-foreground'
+                      ? isDark ? 'bg-zinc-700 text-white' : 'bg-primary text-primary-foreground'
+                      : isDark ? 'bg-zinc-800 text-gray-100' : 'bg-muted text-foreground'
                   }`}
                 >
                   {message.content}
@@ -225,7 +228,7 @@ export default function Chatbot() {
                 <Button
                   key={index}
                   variant="outline"
-                  className="whitespace-nowrap text-sm dark:bg-secondary dark:text-foreground dark:border-border dark:hover:bg-muted"
+                  className={`whitespace-nowrap text-sm ${isDark ? 'bg-zinc-800 text-gray-100 border-zinc-600 hover:bg-zinc-700' : ''}`}
                   onClick={() => handleSend(suggestion)}
                 >
                   {suggestion}
@@ -245,7 +248,7 @@ export default function Chatbot() {
             <Button
               onClick={handleSend}
               disabled={isLoading || !input.trim()}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-zinc-700 dark:text-white dark:hover:bg-zinc-600 min-w-[60px]"
+              className={`min-w-[60px] ${isDark ? 'bg-zinc-700 text-white hover:bg-zinc-600' : 'bg-primary text-primary-foreground hover:bg-primary/90'}`}
             >
               {isLoading ? '...' : 'Send'}
             </Button>
