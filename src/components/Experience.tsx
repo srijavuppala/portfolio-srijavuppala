@@ -18,6 +18,25 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 
 const experiences = [
   {
+    company: "UT Dallas — Hardware Research Lab",
+    role: "Hardware Research Assistant",
+    period: "Nov 2025 - Present",
+    description: "Investigating machine-learning algorithms on real-time operating systems to identify energy-efficient hardware architectures for edge-computing applications.",
+    achievements: [
+      "Built Python/TensorFlow/scikit-learn framework to predict transistor sizing and power-delay tradeoffs for standard cell designs",
+      "Applied reinforcement learning to optimize layout configurations for area and power efficiency",
+      "Reduced manual design iterations by 35% via ML-driven design space exploration",
+      "Conducted comparative analysis of CMOS circuit topologies with ML-driven performance prediction models",
+      "Integrated AI methodologies into traditional ASIC design flows using static code analysis"
+    ],
+    technologies: ["Python", "TensorFlow", "scikit-learn", "RTOS", "ASIC", "Reinforcement Learning", "CMOS"],
+    icon: <BrainCircuitIcon className="w-5 h-5" />,
+    iconBackground: "#FF6B35",
+    links: [
+      { title: "Hardware Research", url: "#" }
+    ]
+  },
+  {
     company: "Optum (UnitedHealth Group)",
     role: "AI & Cloud Engineer",
     period: "Feb 2024 - July 2024",
