@@ -110,7 +110,6 @@ const projects = [
     description: "Designed complete standard cell library — NAND2, NOR2, INV, MUX2, OAI21, DFF — in 65nm CMOS using Cadence Virtuoso. Resolved 500+ DRC/LVS violations with Mentor Calibre. Automated characterization with TCL/shell scripts, cutting iteration time by 40%. Achieved 20% dynamic power reduction through device sizing and logical effort optimization.",
     tags: ["Cadence Virtuoso", "HSPICE", "Mentor Calibre", "TCL", "65nm CMOS"],
     category: "Hardware",
-    github: "https://github.com/srijavuppala",
     featured: true,
   },
   {
@@ -118,7 +117,6 @@ const projects = [
     description: "Neural network predictors estimating power and performance for ASIC architectures targeting edge AI deployment. Integrated ML predictions with HSPICE simulations and unit tests; reduced design time by 25% through early-stage architecture selection.",
     tags: ["Python", "TensorFlow", "HSPICE", "ML", "ASIC"],
     category: "Research",
-    github: "https://github.com/srijavuppala",
     featured: false,
   },
   {
@@ -126,7 +124,6 @@ const projects = [
     description: "Person-following autonomous luggage cart and agricultural monitoring robot with embedded sensor fusion, motor control, and real-time processing. Optimized ML deployment on resource-constrained hardware using quantization for power-efficient edge inference.",
     tags: ["Embedded", "Sensor Fusion", "Quantization", "Python", "Edge AI"],
     category: "Hardware",
-    github: "https://github.com/srijavuppala",
     featured: false,
   },
   {
@@ -134,7 +131,6 @@ const projects = [
     description: "Developed embedded C firmware for automotive ECU with CAN bus communication protocol. Implemented hardware-software co-design for real-time control with strict timing requirements, automated ECU validation frameworks, and fault-tolerant sensor/actuator integration.",
     tags: ["Embedded C", "CAN Bus", "ECU", "RTOS", "Automotive"],
     category: "Hackathon",
-    github: "https://github.com/srijavuppala",
     featured: false,
   },
   {
@@ -142,7 +138,6 @@ const projects = [
     description: "End-to-end hardware agent generating synthesizable RTL from text, PDF, audio, and video specs. Two-oracle verification strategy (spec-derived + smoke testbench) with Verilator, Yosys, SymbiYosys, ngspice, and OpenSTA. Significantly outperforms direct LLM prompting on verified RTL success rate.",
     tags: ["Gemini AI", "SystemVerilog", "Verilator", "Yosys", "SymbiYosys"],
     category: "Research",
-    github: "https://github.com/srijavuppala/rtl_agent",
     featured: true,
   },
   {
@@ -150,7 +145,6 @@ const projects = [
     description: "Maps sparse quantized MLPs to CDM-inspired 4-input XOR/XNOR super-gates at 28nm CMOS. Analytical model shows 80% lower transistor count, 87–94% lower dynamic power, and up to 89× better figure of merit vs baseline. Achieves 97.9% accuracy on network intrusion detection (UNSW-NB15).",
     tags: ["28nm CMOS", "Neural Networks", "XOR/XNOR", "VLSI", "Logic Synthesis"],
     category: "Research",
-    github: "https://github.com/srijavuppala",
     featured: true,
   },
 ];
@@ -251,16 +245,18 @@ const Projects = () => {
                             D
                           </a>
                         )}
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-7 h-7 flex items-center justify-center text-muted-foreground hover:text-foreground border border-border hover:border-foreground/30 rounded-sm transition-all duration-200"
-                          aria-label="View on GitHub"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ArrowUpRight className="h-3.5 w-3.5" />
-                        </a>
+                        {(project as any).github && (
+                          <a
+                            href={(project as any).github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-7 h-7 flex items-center justify-center text-muted-foreground hover:text-foreground border border-border hover:border-foreground/30 rounded-sm transition-all duration-200"
+                            aria-label="View on GitHub"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          </a>
+                        )}
                       </div>
                     </div>
 
