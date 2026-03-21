@@ -228,13 +228,6 @@ const Experience = () => {
 
         {/* About */}
         <div className="mb-16">
-          <p className="section-label mb-5">Full-Stack Engineer · AI · Cloud</p>
-          <h1 className="font-display text-4xl sm:text-5xl font-medium tracking-tight text-foreground leading-[1.05] mb-6">
-            Building systems<br />
-            that <span className="italic font-light text-primary">think</span><br />
-            and scale.
-          </h1>
-          <p className="text-xs font-sans tracking-widest uppercase text-muted-foreground mb-8">Product Developer</p>
           <div className="space-y-4">
             <p className="text-base text-muted-foreground leading-relaxed">
               Cloud-native engineer at <span className="text-foreground font-medium">Optum</span> and{' '}

@@ -56,7 +56,7 @@ export default function Chatbot() {
     scrollToBottom();
   }, [messages]);
 
-  const generateResponse = async (message: string) => {
+  const generateResponse = async (message: string, history: Message[]) => {
     try {
       // Check cache first for better performance
       const cacheKey = message.toLowerCase().trim();
@@ -66,14 +66,15 @@ export default function Chatbot() {
       }
 
       const apiUrl = '/.netlify/functions/chat';
-      
+
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           message: message,
+          history: history,
           systemPrompt: SYSTEM_PROMPT
         }),
       });
@@ -129,10 +130,11 @@ export default function Chatbot() {
     setIsLoading(true);
 
     // Add user message immediately
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    const updatedHistory = [...messages, { role: 'user' as const, content: userMessage }];
+    setMessages(updatedHistory);
 
     try {
-      const response = await generateResponse(userMessage);
+      const response = await generateResponse(userMessage, messages);
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Failed to get response. Please try again.';
@@ -160,9 +162,9 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       {isOpen ? (
-        <Card className="w-[400px] h-[600px] flex flex-col bg-card border border-primary/20 shadow-xl">
+        <Card className="w-[calc(100vw-2rem)] sm:w-[400px] h-[calc(100svh-6rem)] sm:h-[600px] flex flex-col bg-card border border-primary/20 shadow-xl">
           <div className="p-6 border-b bg-transparent text-primary flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="relative">
@@ -246,7 +248,7 @@ export default function Chatbot() {
               disabled={isLoading}
             />
             <Button
-              onClick={handleSend}
+              onClick={() => handleSend()}
               disabled={isLoading || !input.trim()}
               className={`min-w-[60px] ${isDark ? 'bg-zinc-700 text-white hover:bg-zinc-600' : 'bg-primary text-primary-foreground hover:bg-primary/90'}`}
             >

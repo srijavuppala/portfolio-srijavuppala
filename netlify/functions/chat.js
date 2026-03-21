@@ -4,7 +4,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { message, systemPrompt } = JSON.parse(event.body);
+    const { message, systemPrompt, history = [] } = JSON.parse(event.body);
 
     if (!message) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Message is required' }) };
@@ -20,6 +20,14 @@ exports.handler = async (event) => {
     if (systemPrompt) {
       contents.push({ role: 'user', parts: [{ text: "You are Srija Vuppala's AI assistant. Use this info: " + systemPrompt }] });
       contents.push({ role: 'model', parts: [{ text: "Hi! I'm Srija's AI assistant. Ask me anything about her background!" }] });
+    }
+    // Include prior conversation history for context
+    for (const msg of history) {
+      if (msg.role === 'user') {
+        contents.push({ role: 'user', parts: [{ text: msg.content }] });
+      } else if (msg.role === 'assistant') {
+        contents.push({ role: 'model', parts: [{ text: msg.content }] });
+      }
     }
     contents.push({ role: 'user', parts: [{ text: message }] });
 
