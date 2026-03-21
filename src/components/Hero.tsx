@@ -46,17 +46,6 @@ const Hero = ({ onViewProjects }: HeroProps) => {
           and scale.
         </motion.h1>
 
-        <motion.p
-          variants={itemVariants}
-          className="text-base text-muted-foreground leading-relaxed mb-10 max-w-xl font-sans"
-        >
-          Cloud-native engineer at <span className="text-foreground font-normal">Optum</span> and{' '}
-          <span className="text-foreground font-normal">Ericsson</span>. Pursuing a Master's in
-          Computer Engineering at{' '}
-          <span className="text-foreground font-normal">UT Dallas</span>. I build AI-driven systems,
-          distributed infrastructure, and experiences that hold up under pressure.
-        </motion.p>
-
         <motion.div variants={itemVariants} className="flex items-center gap-4 flex-wrap mb-10">
           <button
             onClick={onViewProjects}
