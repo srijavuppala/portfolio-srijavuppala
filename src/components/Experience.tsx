@@ -226,19 +226,6 @@ const Experience = () => {
 
       <div className="relative z-10 max-w-3xl mx-auto">
 
-        {/* About */}
-        <div className="mb-16">
-          <div className="space-y-4">
-            <p className="text-base text-muted-foreground leading-relaxed">
-              Cloud-native engineer at <span className="text-foreground font-medium">Optum</span> and{' '}
-              <span className="text-foreground font-medium">Ericsson</span>. Pursuing a Master's in
-              Computer Engineering at{' '}
-              <span className="text-foreground font-medium">UT Dallas</span>. I build AI-driven systems,
-              distributed infrastructure, and experiences that hold up under pressure.
-            </p>
-          </div>
-        </div>
-
         {/* Experience */}
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-10">
